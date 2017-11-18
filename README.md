@@ -16,18 +16,18 @@ will result in no output and a FIFO with one value (the enqueued one), and (b) s
 - Nonetheless, if a value is enqueue into an empty FIFO on one cycle, it should be possible to dequeue it on the following cycle.
 
 ## Design Metrics:
-- area: Sum the total transistor width for the entire design.
-- memory cell area: Sum the total transistor width for the repeated memory cell in the
+- *area*: Sum the total transistor width for the entire design.
+- *memory cell area*: Sum the total transistor width for the repeated memory cell in the
 memory core.
-- enqueue energy: Measure the energy enqueuing 0xFFFF into a cell that previously
+- *enqueue energy*: Measure the energy enqueuing 0xFFFF into a cell that previously
 held 0x0000 (and vice-versa). Report the larger value.
-- dequeue energy: Measure the energy for a dequeue of a word with 0x0000 and a read
+- *dequeue energy*: Measure the energy for a dequeue of a word with 0x0000 and a read
 of a word with 0xFFFF. Report the larger value.
-- enqueue/dequeue energy: Measure the energy for a cycle that both enqueues and de-
+- *enqueue/dequeue energy*: Measure the energy for a cycle that both enqueues and de-
 queues values. For test case data, use worst-case scenarios as identified for isolated
 enqueue and dequeue.
-- standby energy: Measure the energy of a cycle on which no enqueues or dequeues occur.
-- average energy: Measure the average energy of your queue with the following opera-
+- *standby energy*: Measure the energy of a cycle on which no enqueues or dequeues occur.
+- *average energy*: Measure the average energy of your queue with the following opera-
 tion distribution: 15% enqueue&dequeue, 10% enqueue, 10% dequeue, 65% standby operation.
 
 ## Design:
