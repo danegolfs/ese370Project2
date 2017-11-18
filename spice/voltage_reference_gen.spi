@@ -1,7 +1,7 @@
 *** SPICE deck for cell voltage_reference_gen{sch} from library ese370project2
 *** Created on Sat Nov 18, 2017 12:54:09
-*** Last revised on Sat Nov 18, 2017 13:25:53
-*** Written on Sat Nov 18, 2017 13:31:44 by Electric VLSI Design System, version 9.07
+*** Last revised on Sat Nov 18, 2017 13:36:48
+*** Written on Sat Nov 18, 2017 13:37:02 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -13,8 +13,8 @@
 Ccap@0 gnd vref 0.1u
 Mnmos@0 net_vref net_vref gnd gnd N L=0.022U W=0.088U
 Mnmos@1 vref vdd net_decoupled_vref gnd N L=0.022U W=0.352U
+Mnmos@2 net_decoupled_vref net_vref gnd gnd N L=0.022U W=0.352U
 Mpmos@0 vdd net_vref net_vref vdd P L=0.022U W=0.088U
 Mpmos@1 vdd net_vref net_decoupled_vref vdd P L=0.022U W=0.352U
-Mpmos@2 net_decoupled_vref net_vref gnd vdd P L=0.022U W=0.352U
 VV_Generi@0 vdd gnd DC 0.8 AC 0
 .END
