@@ -66,7 +66,35 @@ Here you can see the slight dip in \textbf{A} before the drive line goes high. E
 \subsubsection{Sense Amplifier}
 Sense amp stuff pls
 \subsubsection{$\frac{\textbf{Vdd}}{\textbf{2}}$ Reference Generator}
-Generator for vdd/2
+Below is the circuit for our voltage reference ($\frac{\textbf{Vdd}}{\textbf{2}}$) generator as given in the assignment prompt.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{vRefGen}
+	\caption{Voltage Reference Generator}
+	\label{fig:vRefGen}
+\end{figure}
+
+We tested the circuit with the below test bench.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{vRefTest}
+	\caption{Voltage Reference Generator Test Bench}
+	\label{fig:vRefTest}
+\end{figure}
+
+With that test bench we generated the below waveform.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.1]{vRefTestWave}
+	\caption{Voltage Reference Generator Test Bench Waveform}
+	\label{fig:vRefTestWave}
+\end{figure}
+
+You can see that for every given value of $V_{dd}$, the output is (or is very very close to) half of $V_{dd}$.
+
 \subsubsection{Bit Line Driver}
 Schematic
 \subsubsection{Complete Bit Line}
