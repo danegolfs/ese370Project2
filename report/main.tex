@@ -52,7 +52,7 @@ To check the correctness of our design, we performed multiple tests. We created 
 	\caption{5TCell Write/Read 1}
 	\label{fig:5TWR1}
 \end{figure}
-We zoomed in on the point where "A" is written to a 1 which is shown below.\\
+We zoomed in on the point where \textbf{A} is written to a 1 which is shown below.\\
 
  \begin{figure}[H]
 	\centering
@@ -61,7 +61,34 @@ We zoomed in on the point where "A" is written to a 1 which is shown below.\\
 	\label{fig:5TWrite1}
 \end{figure}
 
-Here you can see the slight dip in \textbf{A} before the drive line goes high. Eventually as the driving signal goes high, \textbf{A} responds accordingly.\\
+Here you can see the slight dip in \textbf{A} before the drive line goes high. Eventually as the driving signal goes high, \textbf{A} responds accordingly. We also checked the zoomed in part of the read operation and have put that in below.
+
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{5TRead1}
+	\caption{5TCell Read 1}
+	\label{fig:5TRead1}
+\end{figure}
+
+To check the correctness of our memory cell, we also had to check that if we performed a back-to-back read operation after a write, that A didn't flip as a result. Below is our test to check in case \textbf{A} = 1.
+
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{5TDoubleRead1}
+	\caption{5TCell Back-to-Back Read 1}
+	\label{fig:5TBackToBack1}
+\end{figure}
+
+We also checked the back-to-back read operation when \textbf{A} = 0.
+
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{5TDoubleRead0}
+	\caption{5TCell Back-to-Back Read 0}
+	\label{fig:5TBackToBack0}
+\end{figure}
+
+As the figure shows, \textbf{A} stays stable at 0.
 
 \subsubsection{Sense Amplifier}
 Sense amp stuff pls
@@ -70,7 +97,7 @@ Below is the circuit for our voltage reference ($\frac{\textbf{Vdd}}{\textbf{2}}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.12]{vRefGen}
+	\includegraphics[scale=0.17]{vRefGen}
 	\caption{Voltage Reference Generator}
 	\label{fig:vRefGen}
 \end{figure}
@@ -79,7 +106,7 @@ We tested the circuit with the below test bench.\\
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.12]{vRefTest}
+	\includegraphics[scale=0.17]{vRefTest}
 	\caption{Voltage Reference Generator Test Bench}
 	\label{fig:vRefTest}
 \end{figure}
