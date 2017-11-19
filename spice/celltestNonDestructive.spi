@@ -1,0 +1,28 @@
+*** SPICE deck for cell celltest{sch} from library ese370project2
+*** Created on Sat Nov 18, 2017 14:46:32
+*** Last revised on Sun Nov 19, 2017 13:03:30
+*** Written on Sun Nov 19, 2017 13:04:20 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__5TCell FROM CELL 5TCell{sch}
+.SUBCKT ese370project2__5TCell A bitline enable ground power
+Mnmos@2 bitline enable A ground N L=0.022U W=0.022U
+Mnmos@3 net@10 A ground ground N L=0.022U W=0.022U
+Mnmos@4 A net@10 ground ground N L=0.022U W=0.022U
+Mpmos@2 power A net@10 power P L=0.022U W=0.022U
+Mpmos@3 power net@10 A power P L=0.022U W=0.022U
+.ENDS ese370project2__5TCell
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: celltest{sch}
+Mnmos@0 net_BL net_drive_enable net_drive gnd N L=0.022U W=0.022U
+X_5TCell@0 net_A net_BL net_WL gnd vdd ese370project2__5TCell
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Vdrive net_drive gnd pwl (0ns 0 9.99ns 0 10.01ns 0.8V 19.99ns 0.8V 20.01ns 0 23.99ns 0 24.01ns 0.53V 25.99ns 0.53V 26.01ns 0 29.99ns 0 30.01ns 0) DC 0V AC 0V 0
+VdriveE net_drive_enable gnd pwl (0ns 0 9.98ns 0 9.99ns 0.8V 19.98ns 0.8V 19.99ns 0 23.98ns 0 23.99ns 0.8V 25.98ns 0.8V 25.99ns 0 29.98ns 0 29.99ns 0) DC 0V AC 0V 0
+Venable net_WL gnd pwl (0ns 0 9.98ns 0 9.99ns 0.8V 19.98ns 0.8V 19.99ns 0 29.98ns 0 29.99ns 0.8V 39.98ns 0.8V 39.99ns 0 44.99ns 0 54.99ns 0 55ns 0.8V 59.99ns 0.8V 60ns 0) DC 0V AC 0V 0
+.END
