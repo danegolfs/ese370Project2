@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\graphicspath{{img/}}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{float}
 \newcommand*\xor{\mathbin{\oplus}}
@@ -25,8 +26,43 @@ The goal of this project is to design a synchronous 16 bit FIFO register with 16
 \section{Design}
 \label{sec:design}
 \subsubsection{Memory Cell}
-Put memory cell schematics and stuff here
-Make sure to put correctness of the individual memory cell
+Here is the diagram for our 5T memory cell.\\
+
+ \begin{figure}[H]
+ 	\centering
+	 \includegraphics[scale=0.2]{5TCell}
+	 \caption{5T Diagram}
+	 \label{fig:5TCell}
+ \end{figure}
+ 
+To check the correctness of our design, we performed multiple tests. We created a special version of our ultimate memory cell with an output of A so that we can see the fluctuations of the held value. Below is the setup for our test bench.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.2]{5TCellTest}
+	\caption{5TCell Test Bench}
+	\label{fig:5TCellTest}
+\end{figure}
+
+ To start, we wrote a 1 to the memory cell and then read from the same cell. Below is the output waveform of that test.\\
+ 
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{5TWR1}
+	\caption{5TCell Write/Read 1}
+	\label{fig:5TWR1}
+\end{figure}
+We zoomed in on the point where "A" is written to a 1 which is shown below.\\
+
+ \begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{5TWrite1}
+	\caption{5TCell Write 1}
+	\label{fig:5TWrite1}
+\end{figure}
+
+Here you can see the slight dip in \textbf{A} before the drive line goes high. Eventually as the driving signal goes high, \textbf{A} responds accordingly.\\
+
 \subsubsection{Sense Amplifier}
 Sense amp stuff pls
 \subsubsection{$\frac{\textbf{Vdd}}{\textbf{2}}$ Reference Generator}
