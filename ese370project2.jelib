@@ -816,7 +816,7 @@ Epower||D5G2;|pin@10||P
 X
 
 # Cell sense_amp;1{sch}
-Csense_amp;1{sch}||schematic|1511118353714|1511145057772|
+Csense_amp;1{sch}||schematic|1511118353714|1511150866049|
 Ngeneric:Facet-Center|art@0||0|0||||AV
 NOff-Page|conn@0||0|-26|||RRR|
 NOff-Page|conn@1||0|18|||RRR|
@@ -841,7 +841,7 @@ NWire_Pin|pin@12||0|-9.5||||
 NWire_Pin|pin@13||0|-24||||
 NWire_Pin|pin@14||0|11||||
 NWire_Pin|pin@16||6.5|0||||
-Ngeneric:Invisible-Pin|pin@17||-21.5|19|||||ART_message(D5G5;)S[Differential,Sense Amplifier]
+Ngeneric:Invisible-Pin|pin@18||-25.5|16|||||ART_message(D5G5;)S[Differential,Sense Amplifier]
 NTransistor|pmos@0||-5|5.5|||RRR|2|ATTR_length(D5G0.5;X-0.5;Y-1;)S1|ATTR_width(D5G1;X0.5;Y-1;)S1
 NTransistor|pmos@1||4.5|5.5|||R|2|ATTR_length(D5G0.5;X-0.5;Y-1;)S1|ATTR_width(D5G1;X0.5;Y-1;)S1
 Isense_amp;1{ic}|sense_am@0||18.5|16|||D5G4;
@@ -881,7 +881,7 @@ Epower||D5G2;|conn@1|a|P
 X
 
 # Cell sense_amp_test;1{sch}
-Csense_amp_test;1{sch}||schematic|1511132958039|1511137495290|
+Csense_amp_test;1{sch}||schematic|1511132958039|1511145499572|
 IspicepartsS3:VPWL;1{ic}|VPWL@0||-14.5|-10.5|||D5G4;|ATTR_ACM(D6G0.5;NPX1;Y-3;)S0V|ATTR_ACP(D6G0.5;NPX1;Y-3.5;)I0|ATTR_VDC(D6G0.5;NPX1;Y-4;)S0V|ATTR_pwl(D6G0.5;NPX1;Y-2.5;)S0ns 0 500ps 0.8 1ns 0 1500ps 0.8 2ns 0
 IspicepartsS3:VPulse;1{ic}|VPulse@0||-22.5|-10|||D5G4;|ATTR_ACM(D6G0.5;NPX3;Y-1.5;)S0V|ATTR_ACP(D6G0.5;NPX3;Y-2;)I0|ATTR_PW(D6G0.5;NPX3;Y-0.5;)S1ns|ATTR_Per(D6G0.5;NPX3;Y-1;)S2ns|ATTR_TD(D6G0.5;NPX3;Y1;)S0ns|ATTR_TF(D6G0.5;NPX3;)S10ps|ATTR_TR(D6G0.5;NPX3;Y0.5;)S10ps|ATTR_V1(D6G0.5;NPX3;Y2;)I0|ATTR_V2(D6G0.5;NPX3;Y1.5;)S0.8V|ATTR_VDC(D6G0.5;NPX3;Y-2.5;)S0V
 IspicepartsS3:V_Generic;1{ic}|V_Generi@0||-28|-0.5|||D5G4;|ATTR_Voltage(D6G0.5;PX2.5;Y0.5;)SDC 0.8 AC 0
@@ -892,13 +892,21 @@ NGround|gnd@1||9.5|-14||||
 NGround|gnd@2||-3.5|-14||||
 NGround|gnd@3||-22.5|-14.5||||
 NGround|gnd@4||-14.5|-14.5||||
+Iinv;1{ic}|inv@0||26|-2|||D5G4;
+Iinv;1{ic}|inv@1||39|-2|||D5G4;
 NWire_Pin|pin@1||1.5|-4||||
 NWire_Pin|pin@2||-22.5|0.5||||
-NWire_Pin|pin@4||28|-2||||
 NWire_Pin|pin@6||1.5|-2||||
 NWire_Pin|pin@11||-3.5|-4||||
 NWire_Pin|pin@12||-3.5|-6||||
 NWire_Pin|pin@13||-14.5|-2||||
+NWire_Pin|pin@14||26|-8||||
+NWire_Pin|pin@15||9.5|-8||||
+NWire_Pin|pin@16||26|4||||
+NWire_Pin|pin@17||9.5|4||||
+NWire_Pin|pin@19||39|4||||
+NWire_Pin|pin@20||39|-8||||
+NWire_Pin|pin@21||49|-2||||
 NPower|pwr@0||-28|7.5||||
 NPower|pwr@1||9.5|8||||
 Isense_amp;1{ic}|sense_am@0||9.5|-2|||D5G4;
@@ -915,10 +923,22 @@ Awire|net@18|||2700|sense_am@0|in|1.5|-2|pin@6||1.5|-2
 Awire|net@29|||900|pin@11||-3.5|-4|pin@12||-3.5|-6
 Awire|net@30|||1800|V_Generi@1|plus|-3.5|-6|pin@12||-3.5|-6
 Awire|net@32|||900|pin@13||-14.5|-2|VPWL@0|plus|-14.5|-6.5
+Awire|net@33|||1800|sense_am@0|out|17.5|-2|inv@0|in|21|-2
+Awire|net@34|||900|inv@0|ground|26|-5.5|pin@14||26|-8
+Awire|net@35|||0|pin@14||26|-8|pin@15||9.5|-8
+Awire|net@36|||900|sense_am@0|ground|9.5|-7|pin@15||9.5|-8
+Awire|net@37|||2700|inv@0|power|26|2|pin@16||26|4
+Awire|net@38|||0|pin@16||26|4|pin@17||9.5|4
+Awire|net@39|||2700|sense_am@0|power|9.5|3.5|pin@17||9.5|4
+Awire|net@41|||1800|inv@0|o|32|-2|inv@1|in|34|-2
+Awire|net@42|||1800|pin@16||26|4|pin@19||39|4
+Awire|net@43|||900|pin@19||39|4|inv@1|power|39|2
+Awire|net@44|||900|inv@1|ground|39|-5.5|pin@20||39|-8
+Awire|net@45|||0|pin@20||39|-8|pin@14||26|-8
 Awire|net_en|D5G1;||0|sense_am@0|en|1.5|0.5|pin@2||-22.5|0.5
 Awire|net_in|D5G1;||0|sense_am@0|in|1.5|-2|pin@13||-14.5|-2
 Awire|net_n_in|D5G1;||0|pin@1||1.5|-4|pin@11||-3.5|-4
-Awire|net_out|D5G1;||1800|sense_am@0|out|17.5|-2|pin@4||28|-2
+Awire|net_out|D5G1;||1800|inv@1|o|45|-2|pin@21||49|-2
 X
 
 # Cell tristate_buffer;1{ic}

@@ -91,7 +91,24 @@ We also checked the back-to-back read operation when \textbf{A} = 0.
 As the figure shows, \textbf{A} stays stable at 0.
 
 \subsubsection{Sense Amplifier}
-Sense amp stuff pls
+We created a sense amplifier to try and help quicken the voltage pull up or down on the memory read. Below is the circuit for the sense amplifier.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.17]{senseAmp}
+	\caption{Sense Amplifier}
+	\label{fig:senseAmp}
+\end{figure}
+
+Below is the waveform for testing the sense amplifier.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.12]{senseAmpWave}
+	\caption{Sense Amplifier Waveform}
+	\label{fig:senseAmpWave}
+\end{figure}
+
 \subsubsection{$\frac{\textbf{Vdd}}{\textbf{2}}$ Reference Generator}
 Below is the circuit for our voltage reference ($\frac{\textbf{Vdd}}{\textbf{2}}$) generator as given in the assignment prompt.
 
