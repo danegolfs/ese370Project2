@@ -1,0 +1,82 @@
+*** SPICE deck for cell bit_line{sch} from library ese370project2
+*** Created on Sun Nov 19, 2017 19:34:59
+*** Last revised on Sun Nov 19, 2017 21:27:21
+*** Written on Sun Nov 19, 2017 21:27:41 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__5TCell FROM CELL 5TCell{sch}
+.SUBCKT ese370project2__5TCell A bitline enable ground power
+Mnmos@2 bitline enable A ground N L=0.022U W=0.022U
+Mnmos@3 net@10 A ground ground N L=0.022U W=0.022U
+Mnmos@4 A net@10 ground ground N L=0.022U W=0.022U
+Mpmos@2 power A net@10 power P L=0.022U W=0.022U
+Mpmos@3 power net@10 A power P L=0.022U W=0.022U
+.ENDS ese370project2__5TCell
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__sense_amp FROM CELL sense_amp{sch}
+.SUBCKT ese370project2__sense_amp en ground in n_in out power
+Mnmos@1 net@20 n_in out ground N L=0.022U W=0.022U
+Mnmos@2 net@20 en ground ground N L=0.022U W=0.022U
+Mnmos@3 net@8 in net@20 ground N L=0.022U W=0.022U
+Mpmos@0 net@8 net@8 power power P L=0.022U W=0.022U
+Mpmos@1 power net@8 out power P L=0.022U W=0.022U
+.ENDS ese370project2__sense_amp
+
+*** SUBCIRCUIT ese370project2__tristate_buffer FROM CELL tristate_buffer{sch}
+.SUBCKT ese370project2__tristate_buffer en ground in out power
+Mnmos@0 net@1 net@4 ground ground N L=0.022U W=0.352U
+Mnmos@1 out en net@1 ground N L=0.022U W=0.352U
+Mnmos@2 net@4 in ground ground N L=0.022U W=0.088U
+Mpmos@0 power net@4 net@1 power P L=0.022U W=0.352U
+Mpmos@1 power in net@4 power P L=0.022U W=0.088U
+.ENDS ese370project2__tristate_buffer
+
+*** SUBCIRCUIT ese370project2__voltage_reference_gen FROM CELL voltage_reference_gen{sch}
+.SUBCKT ese370project2__voltage_reference_gen en ground power vref
+Mnmos@0 net@1 net@1 ground ground N L=0.022U W=0.088U
+Mnmos@1 vref en net@3 ground N L=0.022U W=0.352U
+Mpmos@0 power net@1 net@1 power P L=0.022U W=0.088U
+Mpmos@1 power net@1 net@3 power P L=0.022U W=0.352U
+Mpmos@2 net@3 net@1 ground power P L=0.022U W=0.352U
+.ENDS ese370project2__voltage_reference_gen
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: bit_line{sch}
+X_5TCell@0 net_a5 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@1 net_a6 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@2 net_a9 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@3 net_a3 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@4 net_a7 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@5 net_a13 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@6 net_a2 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@7 net_a12 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@8 net_a0 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@9 net_a14 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@10 net_a10 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@11 net_a8 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@12 net_a1 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@13 net_a4 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@14 net_a11 net_bitline net_wl gnd vdd ese370project2__5TCell
+X_5TCell@15 net_a15 net_bitline net_wl gnd vdd ese370project2__5TCell
+VVPWL@0 net_pc_en gnd pwl (0ns 0 2ns 0 2010ps 0.8 3ns 0.8 3010ps 0 4ns 0 4010ps 0.8 5ns 0.8 5010ps 0 7ns 0) DC 0V AC 0V 0
+VVPWL@1 net_drive_en gnd pwl (0ns 0 1ns 0 1010ps 0.8 1990ps 0.8 2ns 0 7ns 0 ) DC 0V AC 0V 0
+VVPWL@2 net_data gnd pwl (0ns 0 1ns 0 1010ps 0.8 1990ps 0.8 2ns 0 7ns 0 ) DC 0V AC 0V 0
+VVPWL@3 net_sense_en gnd pwl (0ns 0 3ns 0 3010ps 0.8 4ns 0.8 4010ps 0 5ns 0 5010ps 0.8 6ns 0.8 6010ps 0 7ns 0) DC 0V AC 0V 0
+VVPulse@4 net_wl gnd pulse (0 0.8V 1010ps 10ps 10ps 980ps 2ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xinv@0 gnd net_out_n net_out vdd ese370project2__inv
+Xsense_am@0 net_sense_en gnd net_bitline net_vref_in net_out_n vdd ese370project2__sense_amp
+Xtristate@0 net_drive_en gnd net_data net_bitline vdd ese370project2__tristate_buffer
+Xvoltage_@0 net_pc_en gnd vdd net_bitline ese370project2__voltage_reference_gen
+Xvoltage_@2 vdd gnd vdd net_vref_in ese370project2__voltage_reference_gen
+.END

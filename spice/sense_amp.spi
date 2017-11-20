@@ -1,16 +1,16 @@
 *** SPICE deck for cell sense_amp{sch} from library ese370project2
 *** Created on Sun Nov 19, 2017 14:05:53
-*** Last revised on Sun Nov 19, 2017 19:14:58
-*** Written on Sun Nov 19, 2017 19:15:04 by Electric VLSI Design System, version 9.07
+*** Last revised on Sun Nov 19, 2017 21:29:12
+*** Written on Sun Nov 19, 2017 21:29:36 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
 .include 22nm_HP.pm
 
 *** TOP LEVEL CELL: sense_amp{sch}
-Mnmos@1 net@20 n_in out ground N L=0.022U W=0.088U
-Mnmos@2 net@20 en ground ground N L=0.022U W=0.088U
-Mnmos@3 net@8 in net@20 ground N L=0.022U W=0.088U
+Mnmos@1 net@20 n_in out ground N L=0.022U W=0.044U
+Mnmos@2 net@20 en ground ground N L=0.022U W=0.044U
+Mnmos@3 net@8 in net@20 ground N L=0.022U W=0.022U
 Mpmos@0 net@8 net@8 power power P L=0.022U W=0.022U
-Mpmos@1 power net@8 out power P L=0.022U W=0.022U
+Mpmos@1 power net@8 out power P L=0.022U W=0.044U
 .END
