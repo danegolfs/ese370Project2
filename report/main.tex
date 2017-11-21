@@ -9,6 +9,7 @@
 \usepackage{float}
 \newcommand*\xor{\mathbin{\oplus}}
 \def\code#1{\texttt{#1}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \title{ESE 370 Project 2}
 
@@ -28,12 +29,12 @@ The goal of this project is to design a synchronous 16 bit FIFO register with 16
 \subsubsection{Memory Cell}
 Here is the diagram for our 5T memory cell.\\
 
- \begin{figure}[H]
- 	\centering
-	 \includegraphics[scale=0.2]{5TCell}
-	 \caption{5T Memory Cell Schematic}
-	 \label{fig:5TCell}
- \end{figure}
+\begin{figure}[H]
+	\centering
+ \includegraphics[scale=0.2]{5TCell}
+ \caption{5T Memory Cell Schematic}
+ \label{fig:5TCell}
+\end{figure}
  
 To check the correctness of our design, we performed multiple tests. We created a special version of our ultimate memory cell with an output of A so that we can see the fluctuations of the held value. Below is the setup for our test bench.\\
 
@@ -165,10 +166,115 @@ Finally, below is the waveform which shows our circuit working properly as it sh
 	\caption{Tri-State Buffer Test Bench Waveform}
 	\label{fig:triBufWave}
 \end{figure}
+
 \subsubsection{Complete Bit Line}
+First, we created an entire bitline to test, but after realizing that we only needed to read from and write to a single memory cell to test the entire bitline, we decided to re-size a transistor to mimick the load of the rest of the memory cells. The schematics are shown below: 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{exampleBitlineFull}
+	\caption{Full Schematic}
+	\label{fig:bitlineFull}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{exampleBitlineInputs}
+	\caption{Inputs to Pre-Charge and Tri-State Buffer}
+	\label{fig:bitlineInputs}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{exampleBitlineMemoryCell}
+	\caption{Memory Cell and Sized Load Transistor}
+	\label{fig:bitlineMemCell}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{exampleBitlineSenseInputs}
+	\caption{Differential Sense Amplifier Inputs}
+	\label{fig:bitlineSenseInputs}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{exampleBitlineOutputs}
+	\caption{Output Buffers}
+	\label{fig:bitlineOutputs}
+\end{figure}
+
 \textbf{Correctness}
+The goal is to write a 1 to the memory cell and then read the 1 twice. This ensures that the first read is non-destructive. This target waveform is shown below in Figure \ref{fig:bitlineGoalWave}. The output that we received using the schematics above is shown in Figure \ref{fig:bitlineActualWave}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{exampleBitlineGoalWaveform}
+	\caption{Goal Waveforms for Bitline}
+	\label{fig:bitlineGoalWave}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{exampleBitlineOutputWaveform}
+	\caption{Bitline Output Waveforms}
+	\label{fig:bitlineActualWave}
+\end{figure}
 
 \subsection{Calculations}
+\subsection{Sizing}
+For calculating sizing constraints, we used a 1GHz rise time for the cases of driving a 1, driving a 0, reading a 1, and reading a 0 since we need to do a read and a write in one 500GHz pulse. We estimated $\gamma = 1$. See Figure \ref{fig:sizingMath} for the output from Mathematica. The code is below:
+\\\\\noindent
+\code {
+tau = (2.57/2.2) * 10 \textasciicircum -12 \textnormal{//$\tau$ from previous work}\\
+g = 1 \textnormal{//$\gamma$ assumed to be around 1}\\
+WMC = 1 \textnormal{//Width of Memory Cell Access Transistor}\\
+WMCP = 1 \textnormal{//Width of Memory Cell PMOS}\\
+WMCN = 1 \textnormal{//Width of Memory Cell NMOS}\\
+Clear[WDP, WDN, WDE, WSA, WMC, WMCN, WMCP]\\
+WDN = WDP \textnormal{//Width of Driver NMOS = Width of Driver PMOS}\\
+WDP = 16 \textnormal{//Width of Driver PMOS = 16}\\
+\\
+\textnormal{//For the capacitance of the bitline:}\\
+CBL = 16*g+g*WDE+16*g*WMC+WSA\\
+\\
+\textnormal{//For the Pre-Charge Rise Time}\\
+PCharge = (1/16)*3*16*g*tau + (2/16)*CBL*tau\\
+\\
+\textnormal{//For the Drive 1 Rise Time}\\
+Drive1 = (1/WDP)*g*(WDP+WDN+WDE)*tau+((1/WDP)+\\
+\tab (1/WDE))*CBL*tau+((1/WDP)+(1/WDE)+(1/WMC))*2*g*tau\\
+\\
+\textnormal{//For the Drive 0 Fall Time}\\
+Drive0 = (1/WDN)*g*(WDP+WDN+WDE)*tau+((1/WDP)+\\
+\tab (1/WDE))*CBL*tau+((1/WDP)+(1/WDE)+(1/WMC))*2*g*tau\\
+\\
+\textnormal{//For the Read 1 Rise Time}\\
+Read1 = (1/WMCP)*g*(WMCP+WMCN+WMC)*tau+((1/WMCP)+\\
+\tab (1/WMC)) * CBL * tau\\
+\\
+\textnormal{//For the Read 0 Fall Time}\\
+Read0 = (1/WMCN) * g * (WMCP + WMCN  + WMC) * tau + ((1/WMCP) +\\
+\tab (1/WMC)) * CBL * tau\\
+\\
+\textnormal{//Find an instance where the rise and fall times are all at least 500ps and where the widths are all greater than 1}\\
+FindInstance[\{2.2*PCharge, 2.2* Drive1, 2.2* Drive0, 2.2*Read1, 2.2*Read0,\\
+\tab 1, 1, 1, 1, 1, 1\} <= \{500*10\textasciicircum -12, 500 10 \textasciicircum -12, 500 10\textasciicircum -12,\\
+\tab 500 10\textasciicircum -12, 0.5 * 10 \textasciicircum -9, WDE, WDP, WSA, WMC, WMCN, WMCP\},\\
+\tab \{WDE, WSA, WMC, WMCN, WMCP\}]\\
+\textnormal{//Output}\\
+\{\{WDE -> 1., WSA -> 1., WMC -> 2, WMCN -> 2, WMCP -> 2\}\}
+}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{sizingMath}
+	\caption{Mathematica output for calculating transistor widths}
+	\label{fig:sizingMath}
+\end{figure}
+
+Because of this, we sized the width of the memory cell's PMOS, NMOS, and enable transistors to 2 and the sense enable transistor to 1. 
+
 \subsubsection{Capacitance}
 Bitline with drive and pre-charge enable transistors off:
 \begin{align*}
@@ -176,113 +282,131 @@ C_{BLtotal} &= C_{pre-charger} + C_{driver} + 16 C_{memcell} + C_{senseamp}\\
 &= 16 \gamma C_0 + W_{DriveEn}\gamma C_0 + 16 W_{RWEnable}\gamma C_0 + W_{SenseAmpIn} C_0\\
 &= ((16 + W_{DriveEn}  + 16 W_{RWEnable})\gamma + W_{SenseAmpIn})C_0\\\\
 W_{DriveEn} &= 16\\
-W_{RWEnable} &= 1\\
-W_{SenseAmpIn} &= 1\\
-\textnormal{Assume }\gamma &= 1\\\\
-C_{BLtotal} &= ((16 + 16 + 16 + 1)C_0\\
-&= 49C_0
+W_{RWEnable} &= 2\\
+W_{SenseAmpIn} &= 1\\\\
+C_{BLtotal} &= ((16 + 16  + 16 \times 2)\gamma + 1)C_0\\
+&= ((16 + 16  + 16 \times 2)\gamma + 1)C_0\\
+&= (64\gamma + 1) C_0
 \end{align*}
 
 \subsubsection{Timing}
-To meet 500MHz
-
-\subsubsection{Energy}
-Energy calculations
+The calculations above for sizing were constrained by 1GHz operation. Because the rise of the bit line does not necessarily need to be the entire $2.2\tau$ (since we are only rising from $\frac{Vdd}{2} \rightarrow Vdd$ or from $\frac{Vdd}{2} \rightarrow 0$), this should leave us with widths that are greater than those actually required.
 
 
+% \subsubsection{Energy}
+% \begin{align*}
+% E &= CV^2\\
+% &= (64\gamma + 1) C_0 * Vdd^2\\
+% &= (64\gamma + 1) C_0 * (0.8)^2\\
+% \end{align*}
 
 \section{Metrics}
-\label{sec:mtrics}
+\label{sec:metrics}
 
 \subsection{Area}
 \begin{enumerate}
-\item memory cell area
-\item total area
+\item memory cell area: 8
+\item total area: $16 \times 8 + 84 + 56 + 56 + 6 = 330$
+\subitem Driver = 84
+\subitem Vref Generator = 56
+\subitem Output Buffers = 6
 \end{enumerate}
 
-\subsection{Energy}
-\subsubsection{Enqueue Energy}
-To test enqueue energy, we looked at both the energy to transition from $0x0000$ to $0xFFFF$ and vice-versa. The reported values are below with the test schematic shown in Figure \ref{fig: todo} and the resulting waveforms in Figure \ref{fig: todo} and Figure \ref{fig: todo} respectively.
-$$0x0000 \rightarrow 0xFFFF = xW$$
-$$0xFFFF \rightarrow 0x0000 = yW$$
-\subsubsection{Dequeue Energy}
-This was a test for dequeueing a single value. We tested both $0x0000$ and $0xFFFF$
-$$0x0000 = xW\textnormal{ (shown in Figure \ref{fig: todo})}$$
-$$0xFFFF = yW\textnormal{ (shown in Figure \ref{fig: todo})}$$
+\subsection{Timing}
+For timing, we constrained the sizing equations by a 1GHz operation (within 500ps rise time). The delay from the drive of the wordline to the output changing is 133.111ps (Figure \ref{fig:ioTiming}), which gives ample room to increase as we optimize for energy.
 
-\subsubsection{Enqueue/Dequeue Energy}
-The energy for a single enqueue and dequeue is as follows:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.2]{exampleBitlineIOTiming}
+	\caption{Wordline with Output}
+	\label{fig:ioTiming}
+\end{figure}
 
-\newpage
-\section{Some LaTeX tips}
-\label{sec:latex}
-\subsection{How to Include Figures}
 
-First you have to upload the image file (JPEG, PNG or PDF) from your computer to writeLaTeX using the upload link the project menu. Then use the includegraphics command to include it in your document. Use the figure environment and the caption command to add a number and a caption to your figure. See the code for Figure \ref{fig:frog} in this section for an example.
 
-% \begin{figure}
+% \subsection{Energy}
+% \subsubsection{Enqueue Energy}
+% To test enqueue energy, we looked at both the energy to transition from $0x0000$ to $0xFFFF$ and vice-versa. The reported values are below with the test schematic shown in Figure \ref{fig: todo} and the resulting waveforms in Figure \ref{fig: todo} and Figure \ref{fig: todo} respectively.
+% $$0x0000 \rightarrow 0xFFFF = xW$$
+% $$0xFFFF \rightarrow 0x0000 = yW$$
+% \subsubsection{Dequeue Energy}
+% This was a test for dequeueing a single value. We tested both $0x0000$ and $0xFFFF$
+% $$0x0000 = xW\textnormal{ (shown in Figure \ref{fig: todo})}$$
+% $$0xFFFF = yW\textnormal{ (shown in Figure \ref{fig: todo})}$$
+
+% \subsubsection{Enqueue/Dequeue Energy}
+% The energy for a single enqueue and dequeue is as follows:
+
+% \newpage
+% \section{Some LaTeX tips}
+% \label{sec:latex}
+% \subsection{How to Include Figures}
+
+% First you have to upload the image file (JPEG, PNG or PDF) from your computer to writeLaTeX using the upload link the project menu. Then use the includegraphics command to include it in your document. Use the figure environment and the caption command to add a number and a caption to your figure. See the code for Figure \ref{fig:frog} in this section for an example.
+
+% % \begin{figure}
+% % \centering
+% % \includegraphics[width=0.3\textwidth]{frog.jpg}
+% % \caption{\label{fig:frog}This frog was uploaded to writeLaTeX via the project menu.}
+% % \end{figure}
+
+% \subsection{How to Make Tables}
+
+% Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example.
+
+% \begin{table}
 % \centering
-% \includegraphics[width=0.3\textwidth]{frog.jpg}
-% \caption{\label{fig:frog}This frog was uploaded to writeLaTeX via the project menu.}
-% \end{figure}
+% \begin{tabular}{l|r}
+% Item & Quantity \\\hline
+% Widgets & 42 \\
+% Gadgets & 13
+% \end{tabular}
+% \caption{\label{tab:widgets}An example table.}
+% \end{table}
 
-\subsection{How to Make Tables}
+% \subsection{How to Write Mathematics}
 
-Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example.
+% \LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
 
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
+% \begin{equation}
+% S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
+%       = \frac{1}{n}\sum_{i}^{n} X_i
+% \label{eq:sn}
+% \end{equation}
 
-\subsection{How to Write Mathematics}
+% denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
 
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
+% The equation \ref{eq:sn} is very nice.
 
-\begin{equation}
-S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i
-\label{eq:sn}
-\end{equation}
+% \subsection{How to Make Sections and Subsections}
 
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+% Use section and subsection commands to organize your document. \LaTeX{} handles all the formatting and numbering automatically. Use ref and label commands for cross-references.
 
-The equation \ref{eq:sn} is very nice.
+% \subsection{How to Make Lists}
 
-\subsection{How to Make Sections and Subsections}
+% You can make lists with automatic numbering \dots
 
-Use section and subsection commands to organize your document. \LaTeX{} handles all the formatting and numbering automatically. Use ref and label commands for cross-references.
+% \begin{enumerate}
+% \item Like this,
+% \item and like this.
+% \end{enumerate}
+% \dots or bullet points \dots
+% \begin{itemize}
+% \item Like this,
+% \item and like this.
+% \end{itemize}
+% \dots or with words and descriptions \dots
+% \begin{description}
+% \item[Word] Definition
+% \item[Concept] Explanation
+% \item[Idea] Text
+% \end{description}
 
-\subsection{How to Make Lists}
-
-You can make lists with automatic numbering \dots
-
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}
-\item Like this,
-\item and like this.
-\end{itemize}
-\dots or with words and descriptions \dots
-\begin{description}
-\item[Word] Definition
-\item[Concept] Explanation
-\item[Idea] Text
-\end{description}
-
-We hope you find write\LaTeX\ useful, and please let us know if you have any feedback using the help menu above.
+% We hope you find write\LaTeX\ useful, and please let us know if you have any feedback using the help menu above.
 
 
-\subsection{Code of Academic Integrity}
-I, Phillip Trent, certify that I have complied with the University of Pennsylvania’s Code of Academic Integrity in completing this project.
+\section{Code of Academic Integrity}
+I, Phillip Trent, certify that I have complied with the University of Pennsylvania’s Code of Academic Integrity in completing this project.\\
 I, Dane Walton, certify that I have complied with the University of Pennsylvania’s Code of Academic Integrity in completing this project.
 \end{document}
 

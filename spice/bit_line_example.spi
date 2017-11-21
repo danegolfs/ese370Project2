@@ -1,7 +1,7 @@
 *** SPICE deck for cell bit_line_example{sch} from library ese370project2
 *** Created on Mon Nov 20, 2017 21:26:40
-*** Last revised on Mon Nov 20, 2017 22:45:49
-*** Written on Mon Nov 20, 2017 22:45:58 by Electric VLSI Design System, version 9.07
+*** Last revised on Mon Nov 20, 2017 23:00:50
+*** Written on Mon Nov 20, 2017 23:00:59 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
