@@ -222,7 +222,11 @@ The goal is to write a 1 to the memory cell and then read the 1 twice. This ensu
 \end{figure}
 
 \subsection{Calculations}
+\label{sec:calculations}
+
 \subsection{Sizing}
+\label{subsec:sizing_calc}
+
 For calculating sizing constraints, we used a 1GHz rise time for the cases of driving a 1, driving a 0, reading a 1, and reading a 0 since we need to do a read and a write in one 500GHz pulse. We estimated $\gamma = 1$. See Figure \ref{fig:sizingMath} for the output from Mathematica. The code is below:
 \\\\\noindent
 \code {
@@ -276,6 +280,8 @@ FindInstance[\{2.2*PCharge, 2.2* Drive1, 2.2* Drive0, 2.2*Read1, 2.2*Read0,\\
 Because of this, we sized the width of the memory cell's PMOS, NMOS, and enable transistors to 2 and the sense enable transistor to 1. 
 
 \subsubsection{Capacitance}
+\label{subsec:cap_calc}
+
 Bitline with drive and pre-charge enable transistors off:
 \begin{align*}
 C_{BLtotal} &= C_{pre-charger} + C_{driver} + 16 C_{memcell} + C_{senseamp}\\
@@ -290,6 +296,7 @@ C_{BLtotal} &= ((16 + 16  + 16 \times 2)\gamma + 1)C_0\\
 \end{align*}
 
 \subsubsection{Timing}
+\label{subsec:time_calc}
 The calculations above for sizing were constrained by 1GHz operation. Because the rise of the bit line does not necessarily need to be the entire $2.2\tau$ (since we are only rising from $\frac{Vdd}{2} \rightarrow Vdd$ or from $\frac{Vdd}{2} \rightarrow 0$), this should leave us with widths that are greater than those actually required.
 
 
@@ -313,7 +320,7 @@ The calculations above for sizing were constrained by 1GHz operation. Because th
 \end{enumerate}
 
 \subsection{Timing}
-For timing, we constrained the sizing equations by a 1GHz operation (within 500ps rise time). The delay from the drive of the wordline to the output changing is 133.111ps (Figure \ref{fig:ioTiming}), which gives ample room to increase as we optimize for energy.
+For timing, we constrained the sizing equations in Section \ref{subsec:sizing_calc} by a 1GHz operation (within 500ps rise time). This is so when we run the entire design at 500MHz, we can enqueue and dequeue in a single 500MHz clock cycle. We used the example bitline schematics above to find the delay from driving the wordline to the output. The delay from the drive of the wordline to the output is 133.111ps (Figure \ref{fig:ioTiming}), which gives ample room to increase as we optimize for energy.
 
 \begin{figure}[H]
 	\centering
