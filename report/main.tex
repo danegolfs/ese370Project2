@@ -140,7 +140,31 @@ With that test bench we generated the below waveform.\\
 You can see that for every given value of $V_{dd}$, the output is (or is very close to) half of $V_{dd}$.
 
 \subsubsection{Bit Line Driver}
-Schematic
+
+For the bitline driver we created a tri state buffer so that we could control when and how the bitline was driven. Below is the schematic for the circuit followed by our test bench.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.15]{tristate}
+	\caption{Tri-State Buffer}
+	\label{fig:tristate}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.15]{triBufTest}
+	\caption{Tri-State Buffer Test Bench}
+	\label{fig:triBufTest}
+\end{figure}
+
+Finally, below is the waveform which shows our circuit working properly as it should wherein the output is pushed to the according driving value only when the enable is high.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.15]{triBufWave}
+	\caption{Tri-State Buffer Test Bench Waveform}
+	\label{fig:triBufWave}
+\end{figure}
 \subsubsection{Complete Bit Line}
 \textbf{Correctness}
 
