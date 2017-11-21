@@ -31,7 +31,7 @@ Here is the diagram for our 5T memory cell.\\
  \begin{figure}[H]
  	\centering
 	 \includegraphics[scale=0.2]{5TCell}
-	 \caption{5T Diagram}
+	 \caption{5T Memory Cell Schematic}
 	 \label{fig:5TCell}
  \end{figure}
  
@@ -40,7 +40,7 @@ To check the correctness of our design, we performed multiple tests. We created 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{5TCellTest}
-	\caption{5TCell Test Bench}
+	\caption{5TCell Test Schematic}
 	\label{fig:5TCellTest}
 \end{figure}
 
@@ -146,13 +146,21 @@ Schematic
 
 \subsection{Calculations}
 \subsubsection{Capacitance}
-Bitline with drive and pre-charge enable transistors disabled:
+Bitline with drive and pre-charge enable transistors off:
 \begin{align*}
-C_{total} &= C_{pre-charger} + C_{driver} + 16 C_{memcell} + C_{senseamp}\\
-&= 16 \gamma C_0 + W_{} + 16 C_{memcell} + C_{senseamp}
+C_{BLtotal} &= C_{pre-charger} + C_{driver} + 16 C_{memcell} + C_{senseamp}\\
+&= 16 \gamma C_0 + W_{DriveEn}\gamma C_0 + 16 W_{RWEnable}\gamma C_0 + W_{SenseAmpIn} C_0\\
+&= ((16 + W_{DriveEn}  + 16 W_{RWEnable})\gamma + W_{SenseAmpIn})C_0\\\\
+W_{DriveEn} &= 16\\
+W_{RWEnable} &= 1\\
+W_{SenseAmpIn} &= 1\\
+\textnormal{Assume }\gamma &= 1\\\\
+C_{BLtotal} &= ((16 + 16 + 16 + 1)C_0\\
+&= 49C_0
 \end{align*}
 
 \subsubsection{Timing}
+To meet 500MHz
 
 \subsubsection{Energy}
 Energy calculations

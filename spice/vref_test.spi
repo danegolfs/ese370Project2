@@ -1,7 +1,7 @@
 *** SPICE deck for cell vref_test{sch} from library ese370project2
 *** Created on Sat Nov 18, 2017 13:01:38
-*** Last revised on Sat Nov 18, 2017 13:18:15
-*** Written on Sat Nov 18, 2017 13:39:45 by Electric VLSI Design System, version 9.07
+*** Last revised on Mon Nov 20, 2017 19:55:00
+*** Written on Mon Nov 20, 2017 19:57:17 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -9,16 +9,18 @@
 
 *** SUBCIRCUIT ese370project2__voltage_reference_gen FROM CELL voltage_reference_gen{sch}
 .SUBCKT ese370project2__voltage_reference_gen en ground power vref
-Mnmos@0 net_vref net_vref ground ground N L=0.022U W=0.088U
-Mnmos@1 vref en net_decoupled_vref ground N L=0.022U W=0.352U
-Mnmos@2 net_decoupled_vref net_vref ground ground N L=0.022U W=0.352U
-Mpmos@0 power net_vref net_vref power P L=0.022U W=0.088U
-Mpmos@1 power net_vref net_decoupled_vref power P L=0.022U W=0.352U
+Mnmos@0 net@1 net@1 ground ground N L=0.022U W=0.088U
+Mnmos@1 vref en net@25 ground N L=0.022U W=0.352U
+Mnmos@2 net@25 net@1 ground ground N L=0.022U W=0.352U
+Mpmos@0 power net@1 net@1 power P L=0.022U W=0.088U
+Mpmos@1 power net@1 net@25 power P L=0.022U W=0.352U
 .ENDS ese370project2__voltage_reference_gen
 
 .global gnd vdd
 
 *** TOP LEVEL CELL: vref_test{sch}
+Mnmos@0 net@6 net@8 gnd gnd N L=0.022U W=0.704U
+Mpmos@0 vdd net@8 net@6 vdd P L=0.022U W=0.704U
 VV_Generi@0 vdd gnd DC 0.8 AC 0
 Xvoltage_@0 vdd gnd vdd net_out ese370project2__voltage_reference_gen
 .END

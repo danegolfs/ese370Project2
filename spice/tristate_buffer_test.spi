@@ -1,7 +1,7 @@
 *** SPICE deck for cell tristate_buffer_test{sch} from library ese370project2
 *** Created on Sun Nov 19, 2017 18:09:32
-*** Last revised on Sun Nov 19, 2017 22:45:01
-*** Written on Sun Nov 19, 2017 22:58:48 by Electric VLSI Design System, version 9.07
+*** Last revised on Mon Nov 20, 2017 19:46:50
+*** Written on Mon Nov 20, 2017 19:46:58 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -9,17 +9,20 @@
 
 *** SUBCIRCUIT ese370project2__tristate_buffer FROM CELL tristate_buffer{sch}
 .SUBCKT ese370project2__tristate_buffer en ground in out power
-Mnmos@0 net@1 net@4 ground ground N L=0.022U W=0.352U
-Mnmos@1 out en net@1 ground N L=0.022U W=0.352U
+Mnmos@0 out net@4 net@56 ground N L=0.022U W=0.352U
 Mnmos@2 net@4 in ground ground N L=0.022U W=0.088U
-Mpmos@0 power net@4 net@1 power P L=0.022U W=0.352U
+Mnmos@3 net@56 en ground ground N L=0.022U W=0.352U
+Mnmos@4 net@99 en ground ground N L=0.022U W=0.088U
+Mpmos@0 net@54 net@4 out power P L=0.022U W=0.352U
 Mpmos@1 power in net@4 power P L=0.022U W=0.088U
+Mpmos@3 power net@99 net@54 power P L=0.022U W=0.352U
+Mpmos@4 power en net@99 power P L=0.022U W=0.088U
 .ENDS ese370project2__tristate_buffer
 
 .global gnd vdd
 
 *** TOP LEVEL CELL: tristate_buffer_test{sch}
-Mnmos@0 vdd net_out gnd gnd N L=0.022U W=0.044U
+Ccap@0 gnd net_out 0.1
 VVPulse@0 net_en gnd pulse (0 0.8V 0ns 10ps 10ps 1ns 2ns) DC 0V AC 0V 0
 VVPulse@1 net_in gnd pulse (0 0.8V 0ns 10ps 10ps 500ps 1ns) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
