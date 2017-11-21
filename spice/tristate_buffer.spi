@@ -1,19 +1,19 @@
 *** SPICE deck for cell tristate_buffer{sch} from library ese370project2
 *** Created on Sun Nov 19, 2017 13:59:29
-*** Last revised on Mon Nov 20, 2017 19:20:05
-*** Written on Mon Nov 20, 2017 19:20:13 by Electric VLSI Design System, version 9.07
+*** Last revised on Mon Nov 20, 2017 21:51:45
+*** Written on Mon Nov 20, 2017 21:51:51 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
 .include 22nm_HP.pm
 
 *** TOP LEVEL CELL: tristate_buffer{sch}
-Mnmos@0 out net@4 net@56 ground N L=0.022U W=0.352U
+Mnmos@0 out net@4 net@56 ground N L=0.022U W=0.396U
 Mnmos@2 net@4 in ground ground N L=0.022U W=0.088U
 Mnmos@3 net@56 en ground ground N L=0.022U W=0.352U
-Mnmos@4 net@99 en ground ground N L=0.022U W=0.044U
-Mpmos@0 net@54 net@4 out power P L=0.022U W=0.352U
+Mnmos@4 net@99 en ground ground N L=0.022U W=0.088U
+Mpmos@0 net@54 net@4 out power P L=0.022U W=0.396U
 Mpmos@1 power in net@4 power P L=0.022U W=0.088U
 Mpmos@3 power net@99 net@54 power P L=0.022U W=0.352U
-Mpmos@4 power en net@99 power P L=0.022U W=0.044U
+Mpmos@4 power en net@99 power P L=0.022U W=0.088U
 .END
