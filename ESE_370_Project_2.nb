@@ -1,0 +1,630 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     21076,        621]
+NotebookOptionsPosition[     19542,        568]
+NotebookOutlinePosition[     19900,        584]
+CellTagsIndexPosition[     19857,        581]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"CBL", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"16", "*", "g"}], " ", "+", " ", 
+   RowBox[{"g", " ", "*", " ", "WDE"}], " ", "+", " ", 
+   RowBox[{"16", " ", "*", " ", "g", " ", "*", " ", "WMC"}], "+", " ", 
+   "WSA"}]}]], "Input",
+ CellChangeTimes->{{3.720103504618791*^9, 3.720103592236187*^9}, {
+  3.7201036247433643`*^9, 3.7201036468331823`*^9}, {3.7201040666856527`*^9, 
+  3.720104077731176*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"16", " ", "g"}], "+", 
+  RowBox[{"g", " ", "WDE"}], "+", 
+  RowBox[{"16", " ", "g", " ", "WMC"}], "+", "WSA"}]], "Output",
+ CellChangeTimes->{{3.7201036419016953`*^9, 3.720103648565549*^9}, 
+   3.7201040787901287`*^9, 3.720206494476494*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"PCharge", " ", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "/", "16"}], " ", ")"}], " ", "*", " ", "3", "*", 
+    RowBox[{"(", 
+     RowBox[{"16", " ", "*", " ", "g"}], ")"}], " ", "*", " ", "tau"}], " ", 
+   "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"2", "/", "16"}], ")"}], " ", "*", " ", "CBL", " ", "*", " ", 
+    "tau"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Drive1", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "/", "WDP"}], ")"}], " ", "*", " ", "g", " ", "*", " ", 
+    RowBox[{"(", 
+     RowBox[{"WDP", " ", "+", " ", "WDN", " ", "+", " ", "WDE"}], ")"}], "*", 
+    "tau"}], " ", "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDE"}], ")"}]}], ")"}], " ", "*", " ", "CBL", " ", 
+    "*", " ", "tau"}], " ", "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDE"}], ")"}], " ", "+", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WMC"}], ")"}]}], ")"}], " ", "*", " ", "2", " ", 
+    "*", " ", "g", " ", "*", " ", "tau"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Drive0", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "/", "WDN"}], ")"}], " ", "*", " ", "g", " ", "*", " ", 
+    RowBox[{"(", 
+     RowBox[{"WDP", " ", "+", " ", "WDN", " ", "+", " ", "WDE"}], ")"}], " ", 
+    "*", " ", "tau"}], " ", "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDE"}], ")"}]}], ")"}], " ", "*", " ", "CBL", " ", 
+    "*", "tau"}], "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDE"}], ")"}], " ", "+", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WMC"}], ")"}]}], ")"}], " ", "*", " ", "2", " ", 
+    "*", " ", "g", " ", "*", " ", "tau"}]}]}]}], "Input",
+ CellChangeTimes->{{3.720103654846385*^9, 3.720103839966215*^9}, {
+  3.7201040423990173`*^9, 3.720104143812765*^9}, {3.720104223705847*^9, 
+  3.720104244784111*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"3", " ", "g", " ", "tau"}], "+", 
+  RowBox[{
+   FractionBox["1", "8"], " ", "tau", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"16", " ", "g"}], "+", 
+     RowBox[{"g", " ", "WDE"}], "+", 
+     RowBox[{"16", " ", "g", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",\
+
+ CellChangeTimes->{3.720103845802864*^9, 3.720104246732565*^9, 
+  3.72020649598764*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"g", " ", "tau", " ", 
+    RowBox[{"(", 
+     RowBox[{"WDE", "+", "WDN", "+", "WDP"}], ")"}]}], "WDP"], "+", 
+  RowBox[{"2", " ", "g", " ", "tau", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "WDE"], "+", 
+     FractionBox["1", "WDP"], "+", 
+     FractionBox["1", "WMC"]}], ")"}]}], "+", 
+  RowBox[{"tau", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "WDE"], "+", 
+     FractionBox["1", "WDP"]}], ")"}], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"16", " ", "g"}], "+", 
+     RowBox[{"g", " ", "WDE"}], "+", 
+     RowBox[{"16", " ", "g", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",\
+
+ CellChangeTimes->{3.720103845802864*^9, 3.720104246732565*^9, 
+  3.720206495997959*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"g", " ", "tau", " ", 
+    RowBox[{"(", 
+     RowBox[{"WDE", "+", "WDN", "+", "WDP"}], ")"}]}], "WDN"], "+", 
+  RowBox[{"2", " ", "g", " ", "tau", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "WDE"], "+", 
+     FractionBox["1", "WDP"], "+", 
+     FractionBox["1", "WMC"]}], ")"}]}], "+", 
+  RowBox[{"tau", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "WDE"], "+", 
+     FractionBox["1", "WDP"]}], ")"}], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"16", " ", "g"}], "+", 
+     RowBox[{"g", " ", "WDE"}], "+", 
+     RowBox[{"16", " ", "g", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",\
+
+ CellChangeTimes->{3.720103845802864*^9, 3.720104246732565*^9, 
+  3.720206496006897*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"tau", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"2.57", "/", "2.2"}], ")"}], " ", "*", " ", 
+   RowBox[{"10", " ", "^", " ", 
+    RowBox[{"-", "12"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"g", " ", "=", " ", "1"}], "\[IndentingNewLine]", 
+ RowBox[{"WMC", " ", "=", " ", "1"}], "\[IndentingNewLine]", 
+ RowBox[{"WMCP", " ", "=", " ", "1"}], "\[IndentingNewLine]", 
+ RowBox[{"WMCN", " ", "=", " ", "1"}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "WDP", ",", " ", "WDN", ",", " ", "WDE", ",", " ", "WSA", ",", " ", "WMC", 
+   ",", " ", "WMCN", ",", " ", "WMCP"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"WDN", " ", "=", " ", "WDP"}], "\[IndentingNewLine]", 
+ RowBox[{"WDP", " ", "=", " ", "16"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.7201041743520937`*^9, 3.7201042107451973`*^9}, {
+  3.720104491445327*^9, 3.720104491779751*^9}, {3.7201046374241867`*^9, 
+  3.7201046436615877`*^9}, {3.7201046790030327`*^9, 3.7201047666319857`*^9}, {
+  3.720105012850503*^9, 3.720105137724071*^9}, {3.720105532194583*^9, 
+  3.72010555419976*^9}, {3.720105594349255*^9, 3.720105669827423*^9}, {
+  3.7201057598217688`*^9, 3.7201058361273937`*^9}, {3.7201058793818607`*^9, 
+  3.720105905029355*^9}, {3.720105935171505*^9, 3.720105964913887*^9}, {
+  3.720106078497674*^9, 3.720106079494204*^9}, {3.7202072959933987`*^9, 
+  3.720207310498234*^9}, {3.7202074760274363`*^9, 3.720207491656928*^9}, {
+  3.720276818758933*^9, 3.7202768219878674`*^9}, {3.7202768810831423`*^9, 
+  3.720276881394909*^9}}],
+
+Cell[BoxData["1.168181818181818`*^-12"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.720277161303179*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.720277161311754*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.72027716131728*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.720277161322637*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.7202771613281384`*^9}],
+
+Cell[BoxData["WDP"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.720277161333557*^9}],
+
+Cell[BoxData["16"], "Output",
+ CellChangeTimes->{
+  3.720277051745318*^9, {3.7202771059378*^9, 3.7202771060876417`*^9}, 
+   3.720277161338972*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"CBL", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"16", "*", "g"}], " ", "+", " ", 
+     RowBox[{"g", " ", "*", " ", "WDE"}], " ", "+", " ", 
+     RowBox[{"16", " ", "*", " ", "g", " ", "*", " ", "WMC"}], "+", " ", 
+     "WSA"}]}], "\[IndentingNewLine]", 
+   RowBox[{"PCharge", " ", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "16"}], " ", ")"}], " ", "*", " ", "3", "*", 
+      RowBox[{"(", 
+       RowBox[{"16", " ", "*", " ", "g"}], ")"}], " ", "*", " ", "tau"}], " ",
+      "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"2", "/", "16"}], ")"}], " ", "*", " ", "CBL", " ", "*", " ", 
+      "tau"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{"Drive1", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDP"}], ")"}], " ", "*", " ", "g", " ", "*", " ", 
+      RowBox[{"(", 
+       RowBox[{"WDP", " ", "+", " ", "WDN", " ", "+", " ", "WDE"}], ")"}], 
+      " ", "*", " ", "tau"}], " ", "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDE"}], ")"}]}], ")"}], " ", "*", " ", "CBL", " ",
+       "*", " ", "tau"}], " ", "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDE"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WMC"}], ")"}]}], ")"}], " ", "*", " ", "2", " ", 
+      "*", " ", "g", " ", "*", " ", "tau"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{"Drive0", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WDN"}], ")"}], " ", "*", " ", "g", " ", "*", " ", 
+      RowBox[{"(", 
+       RowBox[{"WDP", " ", "+", " ", "WDN", " ", "+", " ", "WDE"}], ")"}], 
+      " ", "*", " ", "tau"}], " ", "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDE"}], ")"}]}], ")"}], " ", "*", " ", "CBL", " ",
+       "*", "tau"}], "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDP"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WDE"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WMC"}], ")"}]}], ")"}], " ", "*", " ", "2", " ", 
+      "*", " ", "g", " ", "*", " ", "tau"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{"Read1", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WMCP"}], ")"}], " ", "*", " ", "g", " ", "*", " ", 
+      RowBox[{"(", 
+       RowBox[{"WMCP", " ", "+", " ", "WMCN", "  ", "+", " ", "WMC"}], ")"}], 
+      " ", "*", " ", "tau"}], " ", "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WMCP"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WMC"}], ")"}]}], ")"}], " ", "*", " ", "CBL", " ",
+       "*", " ", "tau"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{"Read0", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", "WMCN"}], ")"}], " ", "*", " ", "g", " ", "*", " ", 
+      RowBox[{"(", 
+       RowBox[{"WMCP", " ", "+", " ", "WMCN", "  ", "+", " ", "WMC"}], ")"}], 
+      " ", "*", " ", "tau"}], " ", "+", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WMCP"}], ")"}], " ", "+", " ", 
+        RowBox[{"(", 
+         RowBox[{"1", "/", "WMC"}], ")"}]}], ")"}], " ", "*", " ", "CBL", " ",
+       "*", " ", "tau"}]}]}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.720104256536721*^9, 3.720104260039336*^9}, {
+  3.720104653399569*^9, 3.720104660053576*^9}, {3.7201047877595873`*^9, 
+  3.720104911033922*^9}, {3.720105816553378*^9, 3.7201058204971437`*^9}, {
+  3.720106379794531*^9, 3.720106390753228*^9}}],
+
+Cell[BoxData[
+ RowBox[{"16", "+", "WDE", "+", 
+  RowBox[{"16", " ", "WMC"}], "+", "WSA"}]], "Output",
+ CellChangeTimes->{{3.72027699717583*^9, 3.720276997523197*^9}, {
+   3.720277051892165*^9, 3.720277051986239*^9}, 3.720277106265688*^9, 
+   3.720277161427067*^9}],
+
+Cell[BoxData[
+ RowBox[{"3.504545454545454`*^-12", "+", 
+  RowBox[{"1.4602272727272725`*^-13", " ", 
+   RowBox[{"(", 
+    RowBox[{"16", "+", "WDE", "+", 
+     RowBox[{"16", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.72027699717583*^9, 3.720276997523197*^9}, {
+   3.720277051892165*^9, 3.720277051986239*^9}, 3.720277106265688*^9, 
+   3.720277161438425*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"7.301136363636363`*^-14", " ", 
+   RowBox[{"(", 
+    RowBox[{"32", "+", "WDE"}], ")"}]}], "+", 
+  RowBox[{"2.336363636363636`*^-12", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "16"], "+", 
+     FractionBox["1", "WDE"], "+", 
+     FractionBox["1", "WMC"]}], ")"}]}], "+", 
+  RowBox[{"1.168181818181818`*^-12", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "16"], "+", 
+     FractionBox["1", "WDE"]}], ")"}], " ", 
+   RowBox[{"(", 
+    RowBox[{"16", "+", "WDE", "+", 
+     RowBox[{"16", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.72027699717583*^9, 3.720276997523197*^9}, {
+   3.720277051892165*^9, 3.720277051986239*^9}, 3.720277106265688*^9, 
+   3.720277161448056*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"7.301136363636363`*^-14", " ", 
+   RowBox[{"(", 
+    RowBox[{"32", "+", "WDE"}], ")"}]}], "+", 
+  RowBox[{"2.336363636363636`*^-12", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "16"], "+", 
+     FractionBox["1", "WDE"], "+", 
+     FractionBox["1", "WMC"]}], ")"}]}], "+", 
+  RowBox[{"1.168181818181818`*^-12", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "16"], "+", 
+     FractionBox["1", "WDE"]}], ")"}], " ", 
+   RowBox[{"(", 
+    RowBox[{"16", "+", "WDE", "+", 
+     RowBox[{"16", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.72027699717583*^9, 3.720276997523197*^9}, {
+   3.720277051892165*^9, 3.720277051986239*^9}, 3.720277106265688*^9, 
+   3.720277161457309*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"1.168181818181818`*^-12", " ", 
+    RowBox[{"(", 
+     RowBox[{"WMC", "+", "WMCN", "+", "WMCP"}], ")"}]}], "WMCP"], "+", 
+  RowBox[{"1.168181818181818`*^-12", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "WMC"], "+", 
+     FractionBox["1", "WMCP"]}], ")"}], " ", 
+   RowBox[{"(", 
+    RowBox[{"16", "+", "WDE", "+", 
+     RowBox[{"16", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.72027699717583*^9, 3.720276997523197*^9}, {
+   3.720277051892165*^9, 3.720277051986239*^9}, 3.720277106265688*^9, 
+   3.7202771614666967`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"1.168181818181818`*^-12", " ", 
+    RowBox[{"(", 
+     RowBox[{"WMC", "+", "WMCN", "+", "WMCP"}], ")"}]}], "WMCN"], "+", 
+  RowBox[{"1.168181818181818`*^-12", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox["1", "WMC"], "+", 
+     FractionBox["1", "WMCP"]}], ")"}], " ", 
+   RowBox[{"(", 
+    RowBox[{"16", "+", "WDE", "+", 
+     RowBox[{"16", " ", "WMC"}], "+", "WSA"}], ")"}]}]}]], "Output",
+ CellChangeTimes->{{3.72027699717583*^9, 3.720276997523197*^9}, {
+   3.720277051892165*^9, 3.720277051986239*^9}, 3.720277106265688*^9, 
+   3.720277161475923*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"FindInstance", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"2.2", "*", "PCharge"}], ",", 
+       RowBox[{"2.2", "*", " ", "Drive1"}], ",", 
+       RowBox[{"2.2", "*", " ", "Drive0"}], ",", " ", 
+       RowBox[{"2.2", "*", "Read1"}], ",", " ", 
+       RowBox[{"2.2", "*", "Read0"}], ",", " ", "1", ",", "1", ",", " ", "1", 
+       ",", " ", "1", ",", " ", "1", ",", " ", "1"}], "}"}], "<=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"500", " ", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "12"}]}]}], ",", " ", 
+       RowBox[{"500", " ", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "12"}]}]}], ",", " ", 
+       RowBox[{"500", " ", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "12"}]}]}], ",", " ", 
+       RowBox[{"500", " ", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "12"}]}]}], ",", " ", 
+       RowBox[{"0.5", " ", "*", " ", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "9"}]}]}], ",", " ", "WDE", ",", " ", "WDP", ",", " ", 
+       "WSA", ",", " ", "WMC", ",", " ", "WMCN", ",", " ", "WMCP"}], "}"}]}], 
+    ",", " ", 
+    RowBox[{"{", 
+     RowBox[{
+     "WDE", ",", " ", "WSA", ",", " ", "WMC", ",", " ", "WMCN", ",", " ", 
+      "WMCP"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQAWIQnZa5X69z+2vHny++G4HoXzNn2YJoQ+OHLiB6ofVt
+LxCtcv61P4jWMouMBtFSrpcSwOrZ56eA6Ge/joPpJXVNdSCajc2zBUS/aHzV
+C6K7Jhn0g+hreVOngGgPX5OZIJprL+dJEF0oawGmWTIdLoJopROzwXTBbO5r
+IHrR7GMPQfSUeX3vwObdnPgRRO/yffoNRD9Z9BVMJx0/ydoFpCe1i7GDaN0D
+Fhogmk+uSwtEPzDsF90NpNdNrJcA0VI5PdUgulJpEZiOPyy9FkS/cVyxAUQf
+LPqRdxdIs9+XzwfRog2GxSB6RVgimAYAMLS0pQ==
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"WDE", "\[Rule]", "1.`"}], ",", 
+     RowBox[{"WSA", "\[Rule]", "1.`"}], ",", 
+     RowBox[{"WMC", "\[Rule]", "1.`"}], ",", 
+     RowBox[{"WMCN", "\[Rule]", "1.`"}], ",", 
+     RowBox[{"WMCP", "\[Rule]", "1.`"}]}], "}"}], "}"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.7202803201184273`*^9, 3.7202803202688017`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"WDE", "\[Rule]", "1.`"}], ",", 
+    RowBox[{"WSA", "\[Rule]", "1.`"}], ",", 
+    RowBox[{"WMC", "\[Rule]", "1.`"}], ",", 
+    RowBox[{"WMCN", "\[Rule]", "1.`"}], ",", 
+    RowBox[{"WMCP", "\[Rule]", "1.`"}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.72028032278433*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.720280327930649*^9, 3.7202803306522837`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindInstance", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Ro", " ", "*", " ", 
+       RowBox[{"(", 
+        RowBox[{"Co", " ", "+", " ", 
+         RowBox[{"gam", " ", "*", " ", "Co"}]}], ")"}]}], ",", " ", 
+      RowBox[{"Ro", " ", "*", " ", "2", " ", "*", " ", "Co"}], ",", " ", 
+      RowBox[{
+      "Ro", " ", "*", " ", "2", " ", "*", " ", "gam", " ", "*", " ", "Co"}]}],
+      "}"}], "==", 
+    RowBox[{"{", 
+     RowBox[{"2.19355", ",", " ", "2.35922", ",", " ", "2.35922"}], "}"}]}], 
+   ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"Ro", ",", " ", "Co", ",", " ", "gam"}], "}"}]}], "]"}]], "Input",\
+
+ CellChangeTimes->{{3.72020889007769*^9, 3.720208897735662*^9}, {
+  3.720280337134501*^9, 3.7202804227258387`*^9}, {3.720280464980502*^9, 
+  3.720280479732832*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.720280470600827*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.720208894457849*^9, 3.720208894465263*^9}}]
+},
+WindowSize->{1184, 1006},
+WindowMargins->{{Automatic, 133}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 9, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 423, 9, 28, "Input"],
+Cell[1006, 33, 275, 6, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1318, 44, 2365, 67, 63, "Input"],
+Cell[3686, 113, 397, 12, 48, "Output"],
+Cell[4086, 127, 760, 24, 48, "Output"],
+Cell[4849, 153, 760, 24, 48, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5646, 182, 1554, 27, 165, "Input"],
+Cell[7203, 211, 167, 3, 32, "Output"],
+Cell[7373, 216, 145, 3, 28, "Output"],
+Cell[7521, 221, 144, 3, 28, "Output"],
+Cell[7668, 226, 145, 3, 28, "Output"],
+Cell[7816, 231, 147, 3, 28, "Output"],
+Cell[7966, 236, 147, 3, 28, "Output"],
+Cell[8116, 241, 146, 3, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8299, 249, 4144, 108, 165, "Input"],
+Cell[12446, 359, 264, 5, 28, "Output"],
+Cell[12713, 366, 384, 8, 32, "Output"],
+Cell[13100, 376, 759, 21, 48, "Output"],
+Cell[13862, 399, 759, 21, 48, "Output"],
+Cell[14624, 422, 614, 16, 50, "Output"],
+Cell[15241, 440, 612, 16, 50, "Output"]
+}, Open  ]],
+Cell[15868, 459, 1700, 43, 80, "Input"],
+Cell[CellGroupData[{
+Cell[17593, 506, 442, 11, 63, InheritFromParent],
+Cell[18038, 519, 345, 9, 28, "Output"]
+}, Open  ]],
+Cell[18398, 531, 94, 1, 28, "Input"],
+Cell[CellGroupData[{
+Cell[18517, 536, 824, 22, 28, "Input"],
+Cell[19344, 560, 87, 2, 28, "Output"]
+}, Open  ]],
+Cell[19446, 565, 92, 1, 28, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
