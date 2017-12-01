@@ -1,0 +1,54 @@
+*** SPICE deck for cell counter_test{sch} from library ese370project2
+*** Created on Thu Nov 30, 2017 19:07:58
+*** Last revised on Thu Nov 30, 2017 20:31:28
+*** Written on Thu Nov 30, 2017 20:31:32 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__nand2 FROM CELL nand2{sch}
+.SUBCKT ese370project2__nand2 A B Ground O Power
+Mnmos@0 O A net@36 Ground N L=0.022U W=0.022U
+Mnmos@1 net@36 B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A O Power P L=0.022U W=0.022U
+Mpmos@1 Power B O Power P L=0.022U W=0.022U
+.ENDS ese370project2__nand2
+
+*** SUBCIRCUIT ese370project2__gate_based_latch FROM CELL gate_based_latch{sch}
+.SUBCKT ese370project2__gate_based_latch Ground In Out Phi Power
+Xinv@1 Ground Phi net@22 Power ese370project2__inv
+Xnand2@0 In Phi Ground net@10 Power ese370project2__nand2
+Xnand2@1 net@22 Out Ground net@6 Power ese370project2__nand2
+Xnand2@2 net@10 net@6 Ground Out Power ese370project2__nand2
+.ENDS ese370project2__gate_based_latch
+
+*** SUBCIRCUIT ese370project2__gate_based_register FROM CELL gate_based_register{sch}
+.SUBCKT ese370project2__gate_based_register Clk0 Clk1 Ground In Out Out_n Power
+Xgate_bas@0 Ground In net@0 Clk0 Power ese370project2__gate_based_latch
+Xgate_bas@1 Ground net@0 Out Clk1 Power ese370project2__gate_based_latch
+Xinv@0 Ground Out Out_n Power ese370project2__inv
+.ENDS ese370project2__gate_based_register
+
+*** SUBCIRCUIT ese370project2__counter FROM CELL counter{sch}
+.SUBCKT ese370project2__counter c0 c1 c2 c3 clk clk_n gnd pwr
+Xgate_bas@0 clk clk_n gnd net@0 c0 net@0 pwr ese370project2__gate_based_register
+Xgate_bas@1 c0 net@0 gnd net@51 c1 net@51 pwr ese370project2__gate_based_register
+Xgate_bas@3 c1 net@51 gnd net@81 c2 net@81 pwr ese370project2__gate_based_register
+Xgate_bas@5 c2 net@81 gnd net@99 c3 net@99 pwr ese370project2__gate_based_register
+.ENDS ese370project2__counter
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: counter_test{sch}
+VVPulse@0 clk_not gnd pulse (0V 0.8V 0.05ns 10ps 10ps 0.40ns 1ns) DC 0V AC 0V 0
+VVPulse@1 clk gnd pulse (0 0.8V 0.5ns 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xcounter@0 c0 c1 c2 c3 clk clk_not gnd vdd ese370project2__counter
+.END
