@@ -1,0 +1,46 @@
+*** SPICE deck for cell clock_gen_test{sch} from library ese370project2
+*** Created on Thu Nov 30, 2017 21:45:42
+*** Last revised on Thu Nov 30, 2017 21:48:06
+*** Written on Thu Nov 30, 2017 21:48:11 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__buffer FROM CELL buffer{sch}
+.SUBCKT ese370project2__buffer ground in o power
+Mnmos@0 net@13 in ground ground N L=0.022U W=0.022U
+Mnmos@1 o net@13 ground ground N L=0.022U W=0.022U
+Mpmos@0 power in net@13 power P L=0.022U W=0.022U
+Mpmos@1 power net@13 o power P L=0.022U W=0.022U
+.ENDS ese370project2__buffer
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__nor2 FROM CELL nor2{sch}
+.SUBCKT ese370project2__nor2 A B Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.022U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A net@0 Power P L=0.022U W=0.022U
+Mpmos@1 net@0 B Out Power P L=0.022U W=0.022U
+.ENDS ese370project2__nor2
+
+*** SUBCIRCUIT ese370project2__clock_gen FROM CELL clock_gen{sch}
+.SUBCKT ese370project2__clock_gen clk clk_n ground in power
+Xbuffer@0 ground in net@1 power ese370project2__buffer
+Xinv@0 ground in net@0 power ese370project2__inv
+Xnor2@0 net@0 clk_n ground clk power ese370project2__nor2
+Xnor2@1 clk net@1 ground clk_n power ese370project2__nor2
+.ENDS ese370project2__clock_gen
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: clock_gen_test{sch}
+VVPulse@0 pulse gnd pulse (0 0.8V 0ns 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xclock_ge@0 clk clk_n gnd pulse vdd ese370project2__clock_gen
+.END
