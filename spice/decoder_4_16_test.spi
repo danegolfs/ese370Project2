@@ -1,7 +1,7 @@
 *** SPICE deck for cell decoder_4_16_test{sch} from library ese370project2
 *** Created on Thu Nov 30, 2017 19:20:59
-*** Last revised on Thu Nov 30, 2017 19:26:53
-*** Written on Thu Nov 30, 2017 19:34:29 by Electric VLSI Design System, version 9.07
+*** Last revised on Sat Dec 02, 2017 15:09:36
+*** Written on Sat Dec 02, 2017 15:10:14 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -30,11 +30,27 @@ Mpmos@1 net@0 B Out Power P L=0.022U W=0.022U
 .ENDS ese370project2__nor2
 
 *** SUBCIRCUIT ese370project2__decoder_4_16 FROM CELL decoder_4_16{sch}
-.SUBCKT ese370project2__decoder_4_16 a0 a1 a2 a3 b0 b1 b10 b11 b12 b13 b14 b15 b2 b3 b4 b5 b6 b7 b8 b9 ground power
+.SUBCKT ese370project2__decoder_4_16 a0 a1 a2 a3 b0 b1 b10 b11 b12 b13 b14 b15 b2 b3 b4 b5 b6 b7 b8 b9 ground power rst_n
 Xinv@0 ground a3 net@17 power ese370project2__inv
 Xinv@1 ground a2 net@66 power ese370project2__inv
 Xinv@2 ground a1 net@15 power ese370project2__inv
 Xinv@3 ground a0 net@14 power ese370project2__inv
+Xinv@4 ground net@462 b0 power ese370project2__inv
+Xinv@6 ground net@465 b1 power ese370project2__inv
+Xinv@7 ground net@394 b2 power ese370project2__inv
+Xinv@8 ground net@471 b3 power ese370project2__inv
+Xinv@9 ground net@476 b4 power ese370project2__inv
+Xinv@10 ground net@477 b5 power ese370project2__inv
+Xinv@11 ground net@479 b6 power ese370project2__inv
+Xinv@12 ground net@481 b7 power ese370project2__inv
+Xinv@13 ground net@485 b8 power ese370project2__inv
+Xinv@14 ground net@489 b9 power ese370project2__inv
+Xinv@15 ground net@493 b10 power ese370project2__inv
+Xinv@16 ground net@497 b11 power ese370project2__inv
+Xinv@17 ground net@501 b12 power ese370project2__inv
+Xinv@18 ground net@504 b13 power ese370project2__inv
+Xinv@19 ground net@508 b14 power ese370project2__inv
+Xinv@20 ground net@512 b15 power ese370project2__inv
 Xnand2@0 a2 a3 ground net@194 power ese370project2__nand2
 Xnand2@1 net@66 a3 ground net@182 power ese370project2__nand2
 Xnand2@2 a2 net@17 ground net@167 power ese370project2__nand2
@@ -43,22 +59,38 @@ Xnand2@4 a0 a1 ground net@164 power ese370project2__nand2
 Xnand2@5 net@14 a1 ground net@155 power ese370project2__nand2
 Xnand2@6 a0 net@15 ground net@149 power ese370project2__nand2
 Xnand2@7 net@14 net@15 ground net@143 power ese370project2__nand2
-Xnor2@0 net@143 net@146 ground b0 power ese370project2__nor2
-Xnor2@1 net@149 net@146 ground b1 power ese370project2__nor2
-Xnor2@2 net@155 net@146 ground b2 power ese370project2__nor2
-Xnor2@3 net@146 net@164 ground b3 power ese370project2__nor2
-Xnor2@4 net@167 net@143 ground b4 power ese370project2__nor2
-Xnor2@5 net@167 net@149 ground b5 power ese370project2__nor2
-Xnor2@6 net@167 net@155 ground b6 power ese370project2__nor2
-Xnor2@7 net@167 net@164 ground b7 power ese370project2__nor2
-Xnor2@8 net@182 net@143 ground b8 power ese370project2__nor2
-Xnor2@9 net@182 net@149 ground b9 power ese370project2__nor2
-Xnor2@10 net@182 net@155 ground b10 power ese370project2__nor2
-Xnor2@11 net@182 net@164 ground b11 power ese370project2__nor2
-Xnor2@12 net@194 net@143 ground b12 power ese370project2__nor2
-Xnor2@13 net@194 net@149 ground b13 power ese370project2__nor2
-Xnor2@14 net@194 net@155 ground b14 power ese370project2__nor2
-Xnor2@15 net@194 net@164 ground b15 power ese370project2__nor2
+Xnand2@8 rst_n net@299 ground net@462 power ese370project2__nand2
+Xnand2@9 rst_n net@464 ground net@465 power ese370project2__nand2
+Xnand2@10 rst_n net@467 ground net@394 power ese370project2__nand2
+Xnand2@11 rst_n net@470 ground net@471 power ese370project2__nand2
+Xnand2@12 rst_n net@473 ground net@476 power ese370project2__nand2
+Xnand2@13 rst_n net@475 ground net@477 power ese370project2__nand2
+Xnand2@14 rst_n net@478 ground net@479 power ese370project2__nand2
+Xnand2@15 rst_n net@483 ground net@481 power ese370project2__nand2
+Xnand2@16 rst_n net@484 ground net@485 power ese370project2__nand2
+Xnand2@17 rst_n net@487 ground net@489 power ese370project2__nand2
+Xnand2@18 rst_n net@491 ground net@493 power ese370project2__nand2
+Xnand2@19 rst_n net@495 ground net@497 power ese370project2__nand2
+Xnand2@20 rst_n net@499 ground net@501 power ese370project2__nand2
+Xnand2@21 rst_n net@502 ground net@504 power ese370project2__nand2
+Xnand2@22 rst_n net@506 ground net@508 power ese370project2__nand2
+Xnand2@23 rst_n net@510 ground net@512 power ese370project2__nand2
+Xnor2@0 net@143 net@146 ground net@299 power ese370project2__nor2
+Xnor2@1 net@149 net@146 ground net@464 power ese370project2__nor2
+Xnor2@2 net@155 net@146 ground net@467 power ese370project2__nor2
+Xnor2@3 net@146 net@164 ground net@470 power ese370project2__nor2
+Xnor2@4 net@167 net@143 ground net@473 power ese370project2__nor2
+Xnor2@5 net@167 net@149 ground net@475 power ese370project2__nor2
+Xnor2@6 net@167 net@155 ground net@478 power ese370project2__nor2
+Xnor2@7 net@167 net@164 ground net@483 power ese370project2__nor2
+Xnor2@8 net@182 net@143 ground net@484 power ese370project2__nor2
+Xnor2@9 net@182 net@149 ground net@487 power ese370project2__nor2
+Xnor2@10 net@182 net@155 ground net@491 power ese370project2__nor2
+Xnor2@11 net@182 net@164 ground net@495 power ese370project2__nor2
+Xnor2@12 net@194 net@143 ground net@499 power ese370project2__nor2
+Xnor2@13 net@194 net@149 ground net@502 power ese370project2__nor2
+Xnor2@14 net@194 net@155 ground net@506 power ese370project2__nor2
+Xnor2@15 net@194 net@164 ground net@510 power ese370project2__nor2
 .ENDS ese370project2__decoder_4_16
 
 .global gnd vdd
@@ -68,6 +100,7 @@ VVPulse@0 net_a0 gnd pulse (0 0.8V 1ns 10ps 10ps 1ns 2ns) DC 0V AC 0V 0
 VVPulse@1 net_a1 gnd pulse (0 0.8V 2ns 10ps 10ps 2ns 4ns) DC 0V AC 0V 0
 VVPulse@2 net_a2 gnd pulse (0 0.8V 4ns 10ps 10ps 4ns 8ns) DC 0V AC 0V 0
 VVPulse@3 net_a3 gnd pulse (0 0.8V 8ns 10ps 10ps 8ns 16ns) DC 0V AC 0V 0
+VVPulse@4 net_rst_n gnd pulse (0 0.8V 16ns 10ps 10ps 16ns 32ns) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
-Xdecoder_@0 net_a0 net_a1 net_a2 net_a3 net_b0 net_b1 net_b10 net_b11 net_b12 net_b13 net_b14 net_b15 net_b2 net_b3 net_b4 net_b5 net_b6 net_b7 net_b8 net_b9 gnd vdd ese370project2__decoder_4_16
+Xdecoder_@0 net_a0 net_a1 net_a2 net_a3 net_b0 net_b1 net_b10 net_b11 net_b12 net_b13 net_b14 net_b15 net_b2 net_b3 net_b4 net_b5 net_b6 net_b7 net_b8 net_b9 gnd vdd net_rst_n ese370project2__decoder_4_16
 .END
