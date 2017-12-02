@@ -1,0 +1,214 @@
+*** SPICE deck for cell memory_16x16_test{sch} from library ese370project2
+*** Created on Sat Dec 02, 2017 13:36:08
+*** Last revised on Sat Dec 02, 2017 14:12:48
+*** Written on Sat Dec 02, 2017 14:13:08 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__nand2 FROM CELL nand2{sch}
+.SUBCKT ese370project2__nand2 A B Ground O Power
+Mnmos@0 O A net@36 Ground N L=0.022U W=0.022U
+Mnmos@1 net@36 B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A O Power P L=0.022U W=0.022U
+Mpmos@1 Power B O Power P L=0.022U W=0.022U
+.ENDS ese370project2__nand2
+
+*** SUBCIRCUIT ese370project2__nor2 FROM CELL nor2{sch}
+.SUBCKT ese370project2__nor2 A B Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.022U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A net@0 Power P L=0.022U W=0.022U
+Mpmos@1 net@0 B Out Power P L=0.022U W=0.022U
+.ENDS ese370project2__nor2
+
+*** SUBCIRCUIT ese370project2__decoder_4_16 FROM CELL decoder_4_16{sch}
+.SUBCKT ese370project2__decoder_4_16 a0 a1 a2 a3 b0 b1 b10 b11 b12 b13 b14 b15 b2 b3 b4 b5 b6 b7 b8 b9 ground power
+Xinv@0 ground a3 net@17 power ese370project2__inv
+Xinv@1 ground a2 net@66 power ese370project2__inv
+Xinv@2 ground a1 net@15 power ese370project2__inv
+Xinv@3 ground a0 net@14 power ese370project2__inv
+Xnand2@0 a2 a3 ground net@194 power ese370project2__nand2
+Xnand2@1 net@66 a3 ground net@182 power ese370project2__nand2
+Xnand2@2 a2 net@17 ground net@167 power ese370project2__nand2
+Xnand2@3 net@66 net@17 ground net@146 power ese370project2__nand2
+Xnand2@4 a0 a1 ground net@164 power ese370project2__nand2
+Xnand2@5 net@14 a1 ground net@155 power ese370project2__nand2
+Xnand2@6 a0 net@15 ground net@149 power ese370project2__nand2
+Xnand2@7 net@14 net@15 ground net@143 power ese370project2__nand2
+Xnor2@0 net@143 net@146 ground b0 power ese370project2__nor2
+Xnor2@1 net@149 net@146 ground b1 power ese370project2__nor2
+Xnor2@2 net@155 net@146 ground b2 power ese370project2__nor2
+Xnor2@3 net@146 net@164 ground b3 power ese370project2__nor2
+Xnor2@4 net@167 net@143 ground b4 power ese370project2__nor2
+Xnor2@5 net@167 net@149 ground b5 power ese370project2__nor2
+Xnor2@6 net@167 net@155 ground b6 power ese370project2__nor2
+Xnor2@7 net@167 net@164 ground b7 power ese370project2__nor2
+Xnor2@8 net@182 net@143 ground b8 power ese370project2__nor2
+Xnor2@9 net@182 net@149 ground b9 power ese370project2__nor2
+Xnor2@10 net@182 net@155 ground b10 power ese370project2__nor2
+Xnor2@11 net@182 net@164 ground b11 power ese370project2__nor2
+Xnor2@12 net@194 net@143 ground b12 power ese370project2__nor2
+Xnor2@13 net@194 net@149 ground b13 power ese370project2__nor2
+Xnor2@14 net@194 net@155 ground b14 power ese370project2__nor2
+Xnor2@15 net@194 net@164 ground b15 power ese370project2__nor2
+.ENDS ese370project2__decoder_4_16
+
+*** SUBCIRCUIT ese370project2__5TCell FROM CELL 5TCell{sch}
+.SUBCKT ese370project2__5TCell A bitline enable ground power
+Mnmos@2 bitline enable A ground N L=0.022U W=0.044U
+Mnmos@3 net@10 A ground ground N L=0.022U W=0.022U
+Mnmos@4 A net@10 ground ground N L=0.022U W=0.044U
+Mpmos@2 power A net@10 power P L=0.022U W=0.022U
+Mpmos@3 power net@10 A power P L=0.022U W=0.044U
+.ENDS ese370project2__5TCell
+
+*** SUBCIRCUIT ese370project2__bit_line FROM CELL bit_line{sch}
+.SUBCKT ese370project2__bit_line BL_0 ground Power w0i w10i w11i w12i w13i w14i w15i w1i w2i w3i w4i w5i w6i w7i w8i w9i
+X_5TCell@2 net_a9 BL_0 w9i ground Power ese370project2__5TCell
+X_5TCell@3 net_a3 BL_0 w3i ground Power ese370project2__5TCell
+X_5TCell@4 net_a7 BL_0 w7i ground Power ese370project2__5TCell
+X_5TCell@5 net_a13 BL_0 w13i ground Power ese370project2__5TCell
+X_5TCell@6 net_a2 BL_0 w2i ground Power ese370project2__5TCell
+X_5TCell@7 net_a12 BL_0 w12i ground Power ese370project2__5TCell
+X_5TCell@8 net_a0 BL_0 w0i ground Power ese370project2__5TCell
+X_5TCell@9 net_a14 BL_0 w14i ground Power ese370project2__5TCell
+X_5TCell@10 net_a10 BL_0 w10i ground Power ese370project2__5TCell
+X_5TCell@11 net_a8 BL_0 w8i ground Power ese370project2__5TCell
+X_5TCell@12 net_a1 BL_0 w1i ground Power ese370project2__5TCell
+X_5TCell@13 net_a4 BL_0 w4i ground Power ese370project2__5TCell
+X_5TCell@14 net_a11 BL_0 w11i ground Power ese370project2__5TCell
+X_5TCell@16 net_a5 BL_0 w5i ground Power ese370project2__5TCell
+X_5TCell@17 net_a6 BL_0 w6i ground Power ese370project2__5TCell
+X_5TCell@18 net_a15 BL_0 w15i ground Power ese370project2__5TCell
+.ENDS ese370project2__bit_line
+
+*** SUBCIRCUIT ese370project2__sense_amp FROM CELL sense_amp{sch}
+.SUBCKT ese370project2__sense_amp en ground in n_in out power
+Mnmos@1 net@20 n_in out ground N L=0.022U W=0.022U
+Mnmos@2 net@20 en ground ground N L=0.022U W=0.044U
+Mnmos@3 net@8 in net@20 ground N L=0.022U W=0.022U
+Mpmos@0 net@8 net@8 power power P L=0.022U W=0.022U
+Mpmos@1 power net@8 out power P L=0.022U W=0.022U
+.ENDS ese370project2__sense_amp
+
+*** SUBCIRCUIT ese370project2__voltage_reference_gen FROM CELL voltage_reference_gen{sch}
+.SUBCKT ese370project2__voltage_reference_gen en ground power vref
+Mnmos@0 net@1 net@1 ground ground N L=0.022U W=0.088U
+Mnmos@1 vref en net@25 ground N L=0.022U W=0.352U
+Mnmos@2 net@25 net@1 ground ground N L=0.022U W=0.352U
+Mpmos@0 power net@1 net@1 power P L=0.022U W=0.088U
+Mpmos@1 power net@1 net@25 power P L=0.022U W=0.352U
+.ENDS ese370project2__voltage_reference_gen
+
+*** SUBCIRCUIT ese370project2__sense_amp_wrapper FROM CELL sense_amp_wrapper{sch}
+.SUBCKT ese370project2__sense_amp_wrapper en ground in out power
+Xinv@0 ground net_out_n0 net_out_0 power ese370project2__inv
+Xinv@1 ground net_out_0 net_out_n1 power ese370project2__inv
+Xinv@2 ground net_out_n1 out power ese370project2__inv
+Xsense_am@0 en ground net@30 in net_out_n0 power ese370project2__sense_amp
+Xvoltage_@1 power ground power net@30 ese370project2__voltage_reference_gen
+.ENDS ese370project2__sense_amp_wrapper
+
+*** SUBCIRCUIT ese370project2__tristate_buffer FROM CELL tristate_buffer{sch}
+.SUBCKT ese370project2__tristate_buffer en ground in out power
+Mnmos@0 out net@4 net@56 ground N L=0.022U W=0.396U
+Mnmos@2 net@4 in ground ground N L=0.022U W=0.088U
+Mnmos@3 net@56 en ground ground N L=0.022U W=0.352U
+Mnmos@4 net@99 en ground ground N L=0.022U W=0.088U
+Mpmos@0 net@54 net@4 out power P L=0.022U W=0.396U
+Mpmos@1 power in net@4 power P L=0.022U W=0.088U
+Mpmos@3 power net@99 net@54 power P L=0.022U W=0.352U
+Mpmos@4 power en net@99 power P L=0.022U W=0.088U
+.ENDS ese370project2__tristate_buffer
+
+*** SUBCIRCUIT ese370project2__memory_16x16 FROM CELL memory_16x16{sch}
+.SUBCKT ese370project2__memory_16x16 d0 d1 d10 d11 d12 d13 d14 d15 d2 d3 d4 d5 d6 d7 d8 d9 dr_en ground o0 o1 o10 o11 o12 o13 o14 o15 o2 o3 o4 o5 o6 o7 o8 o9 pc_en power sense_en w0 w1 w10 w11 w12 w13 w14 w15 w2 w3 w4 w5 w6 w7 w8 w9
+Xbit_line@0 net@802 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@1 net@811 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@2 net@820 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@4 net@788 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@5 net@838 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@6 net@847 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@7 net@856 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@8 net@829 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@9 net@874 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@10 net@883 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@11 net@892 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@12 net@865 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@13 net@910 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@14 net@919 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@15 net@928 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xbit_line@16 net@901 ground power w0 w10 w11 w12 w13 w14 w15 w1 w2 w3 w4 w5 w6 w7 w8 w9 ese370project2__bit_line
+Xsense_am@0 sense_en ground net@788 o0 power ese370project2__sense_amp_wrapper
+Xsense_am@1 sense_en ground net@802 o1 power ese370project2__sense_amp_wrapper
+Xsense_am@2 sense_en ground net@811 o2 power ese370project2__sense_amp_wrapper
+Xsense_am@3 sense_en ground net@820 o3 power ese370project2__sense_amp_wrapper
+Xsense_am@4 sense_en ground net@829 o4 power ese370project2__sense_amp_wrapper
+Xsense_am@5 sense_en ground net@838 o5 power ese370project2__sense_amp_wrapper
+Xsense_am@6 sense_en ground net@847 o6 power ese370project2__sense_amp_wrapper
+Xsense_am@7 sense_en ground net@856 o7 power ese370project2__sense_amp_wrapper
+Xsense_am@8 sense_en ground net@865 o8 power ese370project2__sense_amp_wrapper
+Xsense_am@9 sense_en ground net@874 o9 power ese370project2__sense_amp_wrapper
+Xsense_am@10 sense_en ground net@883 o10 power ese370project2__sense_amp_wrapper
+Xsense_am@11 sense_en ground net@892 o11 power ese370project2__sense_amp_wrapper
+Xsense_am@12 sense_en ground net@901 o12 power ese370project2__sense_amp_wrapper
+Xsense_am@13 sense_en ground net@910 o13 power ese370project2__sense_amp_wrapper
+Xsense_am@14 sense_en ground net@919 o14 power ese370project2__sense_amp_wrapper
+Xsense_am@15 sense_en ground net@928 o15 power ese370project2__sense_amp_wrapper
+Xtristate@0 dr_en ground d0 net@788 power ese370project2__tristate_buffer
+Xtristate@1 dr_en ground d1 net@802 power ese370project2__tristate_buffer
+Xtristate@2 dr_en ground d2 net@811 power ese370project2__tristate_buffer
+Xtristate@3 dr_en ground d3 net@820 power ese370project2__tristate_buffer
+Xtristate@4 dr_en ground d4 net@829 power ese370project2__tristate_buffer
+Xtristate@5 dr_en ground d5 net@838 power ese370project2__tristate_buffer
+Xtristate@6 dr_en ground d6 net@847 power ese370project2__tristate_buffer
+Xtristate@7 dr_en ground d7 net@856 power ese370project2__tristate_buffer
+Xtristate@8 dr_en ground d8 net@865 power ese370project2__tristate_buffer
+Xtristate@9 dr_en ground d9 net@874 power ese370project2__tristate_buffer
+Xtristate@10 dr_en ground d10 net@883 power ese370project2__tristate_buffer
+Xtristate@11 dr_en ground d11 net@892 power ese370project2__tristate_buffer
+Xtristate@12 dr_en ground d12 net@901 power ese370project2__tristate_buffer
+Xtristate@13 dr_en ground d13 net@910 power ese370project2__tristate_buffer
+Xtristate@14 dr_en ground d14 net@919 power ese370project2__tristate_buffer
+Xtristate@15 dr_en ground d15 net@928 power ese370project2__tristate_buffer
+Xvoltage_@0 pc_en ground power net@788 ese370project2__voltage_reference_gen
+Xvoltage_@1 pc_en ground power net@802 ese370project2__voltage_reference_gen
+Xvoltage_@2 pc_en ground power net@811 ese370project2__voltage_reference_gen
+Xvoltage_@3 pc_en ground power net@820 ese370project2__voltage_reference_gen
+Xvoltage_@4 pc_en ground power net@829 ese370project2__voltage_reference_gen
+Xvoltage_@5 pc_en ground power net@838 ese370project2__voltage_reference_gen
+Xvoltage_@6 pc_en ground power net@847 ese370project2__voltage_reference_gen
+Xvoltage_@7 pc_en ground power net@856 ese370project2__voltage_reference_gen
+Xvoltage_@8 pc_en ground power net@865 ese370project2__voltage_reference_gen
+Xvoltage_@9 pc_en ground power net@874 ese370project2__voltage_reference_gen
+Xvoltage_@10 pc_en ground power net@883 ese370project2__voltage_reference_gen
+Xvoltage_@11 pc_en ground power net@892 ese370project2__voltage_reference_gen
+Xvoltage_@12 pc_en ground power net@901 ese370project2__voltage_reference_gen
+Xvoltage_@13 pc_en ground power net@910 ese370project2__voltage_reference_gen
+Xvoltage_@14 pc_en ground power net@919 ese370project2__voltage_reference_gen
+Xvoltage_@15 pc_en ground power net@928 ese370project2__voltage_reference_gen
+.ENDS ese370project2__memory_16x16
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: memory_16x16_test{sch}
+VVPWL@0 net_pc_en gnd pwl (0ns 0 2ns 0 2010ps 0.8 3ns 0.8 3010ps 0 4ns 0 4010ps 0.8 5ns 0.8 5010ps 0 7ns 0) DC 0V AC 0V 0
+VVPWL@1 net_drive_en gnd pwl (0ns 0 1ns 0 1010ps 0.8 1990ps 0.8 2ns 0 7ns 0 ) DC 0V AC 0V 0
+VVPWL@3 net_sense_en gnd pwl (0ns 0 3ns 0 3050ps 0.8 3950ps 0.8 4ns 0 5ns 0 5010ps 0.8 5990ps 0.8 6ns 0 7ns 0) DC 0V AC 0V 0
+VVPulse@0 net_addr0 gnd pulse (0 0.8V 1ns 10ps 10ps 1ns 2ns) DC 0V AC 0V 0
+VVPulse@1 net_addr1 gnd pulse (0 0.8V 2ns 10ps 10ps 2ns 4ns) DC 0V AC 0V 0
+VVPulse@2 net_addr2 gnd pulse (0 0.8V 4ns 10ps 10ps 4ns 8ns) DC 0V AC 0V 0
+VVPulse@3 net_addr3 gnd pulse (0 0.8V 8ns 10ps 10ps 8ns 16ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xdecoder_@0 net_addr0 net_addr1 net_addr2 net_addr3 net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 gnd vdd ese370project2__decoder_4_16
+Xdecoder_@1 vdd vdd vdd vdd net_d0 net_d1 net_d10 net_d11 net_d12 net_d13 net_d14 net_d14 net_d2 net_d3 net_d4 net_d5 net_d6 net_d7 net_d8 net_d9 gnd vdd ese370project2__decoder_4_16
+Xmemory_1@0 net_d0 net_d1 net_d10 net_d11 net_d12 net_d13 net_d14 net_d14 net_d2 net_d3 net_d4 net_d5 net_d6 net_d7 net_d8 net_d9 net_drive_en gnd net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_pc_en vdd net_sense_en net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ese370project2__memory_16x16
+.END
