@@ -1,0 +1,130 @@
+*** SPICE deck for cell counter_logic_test{sch} from library ese370project2
+*** Created on Sat Dec 02, 2017 16:01:14
+*** Last revised on Sat Dec 02, 2017 16:14:46
+*** Written on Sat Dec 02, 2017 16:14:51 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__nor4 FROM CELL nor4{sch}
+.SUBCKT ese370project2__nor4 A B C D Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.022U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.022U
+Mnmos@2 Out C Ground Ground N L=0.022U W=0.022U
+Mnmos@3 Out D Ground Ground N L=0.022U W=0.022U
+Mpmos@0 net@28 C net@0 Power P L=0.022U W=0.022U
+Mpmos@1 net@0 D Out Power P L=0.022U W=0.022U
+Mpmos@2 Power A net@27 Power P L=0.022U W=0.022U
+Mpmos@3 net@27 B net@28 Power P L=0.022U W=0.022U
+.ENDS ese370project2__nor4
+
+*** SUBCIRCUIT ese370project2__nand2 FROM CELL nand2{sch}
+.SUBCKT ese370project2__nand2 A B Ground O Power
+Mnmos@0 O A net@36 Ground N L=0.022U W=0.022U
+Mnmos@1 net@36 B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A O Power P L=0.022U W=0.022U
+Mpmos@1 Power B O Power P L=0.022U W=0.022U
+.ENDS ese370project2__nand2
+
+*** SUBCIRCUIT ese370project2__xor2 FROM CELL xor2{sch}
+.SUBCKT ese370project2__xor2 A B gnd out pwr
+Xnand2@0 A B gnd net@21 pwr ese370project2__nand2
+Xnand2@1 net@21 B gnd net@0 pwr ese370project2__nand2
+Xnand2@2 A net@21 gnd net@3 pwr ese370project2__nand2
+Xnand2@3 net@3 net@0 gnd out pwr ese370project2__nand2
+.ENDS ese370project2__xor2
+
+*** SUBCIRCUIT ese370project2__comparator FROM CELL comparator{sch}
+.SUBCKT ese370project2__comparator a0 a1 a2 a3 b0 b1 b2 b3 gnd out pwr
+Xnor4@0 net@51 net@48 net@45 net@42 gnd out pwr ese370project2__nor4
+Xxor2@0 a0 b0 gnd net@51 pwr ese370project2__xor2
+Xxor2@1 a1 b1 gnd net@48 pwr ese370project2__xor2
+Xxor2@2 a2 b2 gnd net@45 pwr ese370project2__xor2
+Xxor2@3 a3 b3 gnd net@42 pwr ese370project2__xor2
+.ENDS ese370project2__comparator
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__gate_based_latch FROM CELL gate_based_latch{sch}
+.SUBCKT ese370project2__gate_based_latch Ground In Out Phi Power
+Xinv@1 Ground Phi net@22 Power ese370project2__inv
+Xnand2@0 In Phi Ground net@10 Power ese370project2__nand2
+Xnand2@1 net@22 Out Ground net@6 Power ese370project2__nand2
+Xnand2@2 net@10 net@6 Ground Out Power ese370project2__nand2
+.ENDS ese370project2__gate_based_latch
+
+*** SUBCIRCUIT ese370project2__gate_based_register FROM CELL gate_based_register{sch}
+.SUBCKT ese370project2__gate_based_register Clk0 Clk1 Ground In Out Out_n Power
+Xgate_bas@0 Ground In net@0 Clk0 Power ese370project2__gate_based_latch
+Xgate_bas@1 Ground net@0 Out Clk1 Power ese370project2__gate_based_latch
+Xinv@0 Ground Out Out_n Power ese370project2__inv
+.ENDS ese370project2__gate_based_register
+
+*** SUBCIRCUIT ese370project2__counter FROM CELL counter{sch}
+.SUBCKT ese370project2__counter c0 c1 c2 c3 clk clk_n gnd pwr
+Xgate_bas@0 clk clk_n gnd net@0 c0 net@0 pwr ese370project2__gate_based_register
+Xgate_bas@1 c0 net@0 gnd net@51 c1 net@51 pwr ese370project2__gate_based_register
+Xgate_bas@3 c1 net@51 gnd net@81 c2 net@81 pwr ese370project2__gate_based_register
+Xgate_bas@5 c2 net@81 gnd net@99 c3 net@99 pwr ese370project2__gate_based_register
+.ENDS ese370project2__counter
+
+*** SUBCIRCUIT ese370project2__nand3 FROM CELL nand3{sch}
+.SUBCKT ese370project2__nand3 A B C out
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 out A net@9 gnd N L=0.022U W=0.022U
+Mnmos@1 net@9 B net@10 gnd N L=0.022U W=0.022U
+Mnmos@2 net@10 C gnd gnd N L=0.022U W=0.022U
+Mpmos@0 vdd C out vdd P L=0.022U W=0.022U
+Mpmos@1 vdd B out vdd P L=0.022U W=0.022U
+Mpmos@2 vdd A out vdd P L=0.022U W=0.022U
+.ENDS ese370project2__nand3
+
+*** SUBCIRCUIT ese370project2__bitslice FROM CELL bitslice{sch}
+.SUBCKT ese370project2__bitslice A B Cin Cout gnd pwr S
+** GLOBAL gnd
+** GLOBAL vdd
+Xnand2@0 A Cin gnd net@5 pwr ese370project2__nand2
+Xnand2@1 A B gnd net@107 pwr ese370project2__nand2
+Xnand2@2 B Cin gnd net@1 pwr ese370project2__nand2
+Xnand3@0 net@5 net@107 net@1 Cout ese370project2__nand3
+Xxor2@0 B A gnd net@9 pwr ese370project2__xor2
+Xxor2@1 net@9 Cin gnd S pwr ese370project2__xor2
+.ENDS ese370project2__bitslice
+
+*** SUBCIRCUIT ese370project2__four_adder FROM CELL four_adder{sch}
+.SUBCKT ese370project2__four_adder a0 a1 a2 a3 b0 b1 b2 b3 gnd pwr s0 s1 s2 s3
+** GLOBAL gnd
+** GLOBAL vdd
+Xbitslice@0 a1 b1 net@20 net@26 gnd pwr s1 ese370project2__bitslice
+Xbitslice@1 a2 b2 net@26 net@31 gnd pwr s2 ese370project2__bitslice
+Xbitslice@2 a3 b3 net@31 net@41 gnd pwr s3 ese370project2__bitslice
+Xbitslice@3 a0 b0 gnd net@20 gnd pwr s0 ese370project2__bitslice
+.ENDS ese370project2__four_adder
+
+*** SUBCIRCUIT ese370project2__counter_logic FROM CELL counter_logic{sch}
+.SUBCKT ese370project2__counter_logic empty full gnd head pwr tail
+** GLOBAL gnd
+** GLOBAL vdd
+Xcomparat@0 net@100 net@99 net@98 net@97 net@94 net@101 net@104 net@107 gnd full pwr ese370project2__comparator
+Xcomparat@1 net@20 net@23 net@25 net@28 net@94 net@101 net@104 net@107 gnd empty pwr ese370project2__comparator
+Xcounter@0 net@20 net@23 net@25 net@28 head net@52 gnd pwr ese370project2__counter
+Xcounter@1 net@94 net@101 net@104 net@107 tail net@58 gnd pwr ese370project2__counter
+Xfour_add@0 net@20 net@23 net@25 net@28 pwr gnd gnd gnd gnd pwr net@100 net@99 net@98 net@97 ese370project2__four_adder
+Xinv@0 gnd head net@52 pwr ese370project2__inv
+Xinv@1 gnd tail net@58 pwr ese370project2__inv
+.ENDS ese370project2__counter_logic
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: counter_logic_test{sch}
+VVPWL@0 tail gnd pwl (0ns 0 2ns 0) DC 0V AC 0V 0
+VVPWL@1 head gnd pwl (0ps 0 0.99ns 0 1ns 0.8 2ns 0.8) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xcounter_@0 empty full gnd head vdd tail ese370project2__counter_logic
+.END

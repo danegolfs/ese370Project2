@@ -1,0 +1,91 @@
+*** SPICE deck for cell control_logic_test{sch} from library ese370project2
+*** Created on Sat Dec 02, 2017 13:02:05
+*** Last revised on Sat Dec 02, 2017 13:26:09
+*** Written on Sat Dec 02, 2017 13:26:35 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__buffer FROM CELL buffer{sch}
+.SUBCKT ese370project2__buffer ground in o power
+Mnmos@0 net@13 in ground ground N L=0.022U W=0.022U
+Mnmos@1 o net@13 ground ground N L=0.022U W=0.022U
+Mpmos@0 power in net@13 power P L=0.022U W=0.022U
+Mpmos@1 power net@13 o power P L=0.022U W=0.022U
+.ENDS ese370project2__buffer
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__nor2 FROM CELL nor2{sch}
+.SUBCKT ese370project2__nor2 A B Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.022U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A net@0 Power P L=0.022U W=0.022U
+Mpmos@1 net@0 B Out Power P L=0.022U W=0.022U
+.ENDS ese370project2__nor2
+
+*** SUBCIRCUIT ese370project2__clock_gen FROM CELL clock_gen{sch}
+.SUBCKT ese370project2__clock_gen clk clk_n ground in power
+Xbuffer@0 ground in net@1 power ese370project2__buffer
+Xinv@0 ground in net@0 power ese370project2__inv
+Xnor2@0 net@0 clk_n ground clk power ese370project2__nor2
+Xnor2@1 clk net@1 ground clk_n power ese370project2__nor2
+.ENDS ese370project2__clock_gen
+
+*** SUBCIRCUIT ese370project2__nand2 FROM CELL nand2{sch}
+.SUBCKT ese370project2__nand2 A B Ground O Power
+Mnmos@0 O A net@36 Ground N L=0.022U W=0.022U
+Mnmos@1 net@36 B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A O Power P L=0.022U W=0.022U
+Mpmos@1 Power B O Power P L=0.022U W=0.022U
+.ENDS ese370project2__nand2
+
+*** SUBCIRCUIT ese370project2__gate_based_latch FROM CELL gate_based_latch{sch}
+.SUBCKT ese370project2__gate_based_latch Ground In Out Phi Power
+Xinv@1 Ground Phi net@22 Power ese370project2__inv
+Xnand2@0 In Phi Ground net@10 Power ese370project2__nand2
+Xnand2@1 net@22 Out Ground net@6 Power ese370project2__nand2
+Xnand2@2 net@10 net@6 Ground Out Power ese370project2__nand2
+.ENDS ese370project2__gate_based_latch
+
+*** SUBCIRCUIT ese370project2__gate_based_register FROM CELL gate_based_register{sch}
+.SUBCKT ese370project2__gate_based_register Clk0 Clk1 Ground In Out Out_n Power
+Xgate_bas@0 Ground In net@0 Clk0 Power ese370project2__gate_based_latch
+Xgate_bas@1 Ground net@0 Out Clk1 Power ese370project2__gate_based_latch
+Xinv@0 Ground Out Out_n Power ese370project2__inv
+.ENDS ese370project2__gate_based_register
+
+*** SUBCIRCUIT ese370project2__clock_box FROM CELL clock_box{sch}
+.SUBCKT ese370project2__clock_box _1Ghz _1Ghz_n _500Mhz _500Mhz_n gnd in pwr
+Xclock_ge@0 _500Mhz _500Mhz_n gnd net@11 pwr ese370project2__clock_gen
+Xclock_ge@1 _1Ghz _1Ghz_n gnd in pwr ese370project2__clock_gen
+Xgate_bas@0 net@43 in gnd net@0 net@11 net@0 pwr ese370project2__gate_based_register
+Xinv@0 gnd in net@43 pwr ese370project2__inv
+.ENDS ese370project2__clock_box
+
+*** SUBCIRCUIT ese370project2__control_logic FROM CELL control_logic{sch}
+.SUBCKT ese370project2__control_logic deq enq ghz gnd mhz pwr read write
+Xinv@0 gnd net@41 read pwr ese370project2__inv
+Xinv@1 gnd net@0 write pwr ese370project2__inv
+Xinv@3 gnd net@34 net@38 pwr ese370project2__inv
+Xinv@4 gnd ghz net@91 pwr ese370project2__inv
+Xnand2@0 enq net@38 gnd net@0 pwr ese370project2__nand2
+Xnand2@1 net@36 deq gnd net@41 pwr ese370project2__nand2
+Xnand2@3 net@91 mhz gnd net@34 pwr ese370project2__nand2
+Xnor2@1 ghz mhz gnd net@36 pwr ese370project2__nor2
+.ENDS ese370project2__control_logic
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: control_logic_test{sch}
+VVPulse@0 net@29 gnd pulse (0 0.8V 0ns 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
+VVPulse@1 enq gnd pulse (0 0.8V 0.25ns 10ps 10ps 0.75ns 1ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xclock_bo@0 ghz clock_bo@0_1Ghz_n mhz clock_bo@0_500Mhz_n gnd net@29 vdd ese370project2__clock_box
+Xcontrol_@0 net@9 enq ghz gnd mhz vdd read write ese370project2__control_logic
+.END
