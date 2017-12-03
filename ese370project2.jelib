@@ -10510,11 +10510,11 @@ Epower||D5G2;|conn@0|a|P
 X
 
 # Cell top_16x16_fifo_mem_test;1{sch}
-Ctop_16x16_fifo_mem_test;1{sch}||schematic|1512272050645|1512273591607|
+Ctop_16x16_fifo_mem_test;1{sch}||schematic|1512272050645|1512274829005|
 IspicepartsS3:VPWL;1{ic}|VPWL@0||-31|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-1;Y-5;)S0V|ATTR_ACP(D6G0.5;NPX-1;Y-5.5;)I0|ATTR_VDC(D6G0.5;NPX-1;Y-6;)S0V|ATTR_pwl(D6G0.5;NPX-1;Y-4.5;)S0ps 0 5ps 0
-IspicepartsS3:VPWL;1{ic}|VPWL@1||-38.5|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-0.5;Y-8;)S0V|ATTR_ACP(D6G0.5;NPX-0.5;Y-8.5;)I0|ATTR_VDC(D6G0.5;NPX-0.5;Y-9;)S0V|ATTR_pwl(D6G0.5;NPX-0.5;Y-7.5;)S0ps 0 1ps 0.8 999ps 0.8 1ns 0 4ns 0 4001ps 0.8 4999ps 0.8 5ns 0
-IspicepartsS3:VPWL;1{ic}|VPWL@2||-45.5|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-3;Y-10;)S0V|ATTR_ACP(D6G0.5;NPX-3;Y-10.5;)I0|ATTR_VDC(D6G0.5;NPX-3;Y-11;)S0V|ATTR_pwl(D6G0.5;NPX-3;Y-9.5;)S0ps 0 1ps 0.8 999ps 0.8 1ns 0 4ns 0 4001ps 0.8 4999ps 0.8 5ns 0
-IspicepartsS3:VPWL;1{ic}|VPWL@3||-53|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-4;Y-5.5;)S0V|ATTR_ACP(D6G0.5;NPX-4;Y-6;)I0|ATTR_VDC(D6G0.5;NPX-4;Y-6.5;)S0V|ATTR_pwl(D6G0.5;NPX-4;Y-5;)S0ps 0 2ps 0 2001ps 0.8 2999ps 0.8 3ns 0 5ns 0
+IspicepartsS3:VPWL;1{ic}|VPWL@1||-38.5|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-0.5;Y-8;)S0V|ATTR_ACP(D6G0.5;NPX-0.5;Y-8.5;)I0|ATTR_VDC(D6G0.5;NPX-0.5;Y-9;)S0V|ATTR_pwl(D6G0.5;NPX-0.5;Y-7.5;)S0ps 0 1ps 0.8 1999ps 0.8 2ns 0 8ns 0 8001ps 0.8 9999ps 0.8 10ns 0
+IspicepartsS3:VPWL;1{ic}|VPWL@2||-45.5|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-3;Y-10;)S0V|ATTR_ACP(D6G0.5;NPX-3;Y-10.5;)I0|ATTR_VDC(D6G0.5;NPX-3;Y-11;)S0V|ATTR_pwl(D6G0.5;NPX-3;Y-9.5;)S0ps 0 1ps 0.8 1999ps 0.8 2ns 0 8ns 0 8001ps 0.8 9999ps 0.8 10ns 0
+IspicepartsS3:VPWL;1{ic}|VPWL@3||-53|-11.5|||D5G4;|ATTR_ACM(D6G0.5;NPX-4;Y-5.5;)S0V|ATTR_ACP(D6G0.5;NPX-4;Y-6;)I0|ATTR_VDC(D6G0.5;NPX-4;Y-6.5;)S0V|ATTR_pwl(D6G0.5;NPX-4;Y-5;)S0ps 0 4ns 0 4001ps 0.8 5999ps 0.8 6ns 0 10ns 0
 IspicepartsS3:VPulse;1{ic}|VPulse@0||-26|39|||D5G4;|ATTR_ACM(D6G0.5;NPX-5;Y-1.5;)S0V|ATTR_ACP(D6G0.5;NPX-5;Y-2;)I0|ATTR_PW(D6G0.5;NPX-5;Y-0.5;)S0.5ns|ATTR_Per(D6G0.5;NPX-5;Y-1;)S1ns|ATTR_TD(D6G0.5;NPX-5;Y1;)S0ns|ATTR_TF(D6G0.5;NPX-5;)S10ps|ATTR_TR(D6G0.5;NPX-5;Y0.5;)S10ps|ATTR_V1(D6G0.5;NPX-5;Y2;)I0|ATTR_V2(D6G0.5;NPX-5;Y1.5;)S0.8V|ATTR_VDC(D6G0.5;NPX-5;Y-2.5;)S0V
 IspicepartsS3:V_Generic;1{ic}|V_Generi@0||14|42.5|||D5G4;|ATTR_Voltage(D6G0.5;PX3;Y0.5;)SDC 0.8 AC 0
 Ngeneric:Facet-Center|art@0||0|0||||AV
@@ -10576,8 +10576,13 @@ NWire_Pin|pin@51||-42|-13.5||||
 NPower|pwr@0||14|49||||
 NPower|pwr@1||-0.5|37.5||||
 Itop_16x16_fifo_mem;1{ic}|top_16x1@0||-1.5|13|||D5G4;
+Awire|clk|D5G1;||1800|pin@19||-26|45|pin@20||-13|45
+Awire|deq|D5G1;||0|pin@18||-31|31|pin@43||-53|31
 Awire|empty|D5G1;||1800|top_16x1@0|empty|19.5|29|pin@1||27.5|29
+Awire|enq|D5G1;||0|top_16x1@0|enqueue|-22.5|29|pin@42||-45.5|29
 Awire|full|D5G1;||1800|top_16x1@0|full|19.5|31|pin@0||27.5|31
+Awire|in_high|D5G1;||0|top_16x1@0|in4|-22.5|18|pin@30||-31|18
+Awire|in_low|D5G1;||0|top_16x1@0|in0|-22.5|26|pin@32||-38.5|26
 Awire|net@0|||2700|gnd@0||14|41.5|V_Generi@0|minus|14|42.5
 Awire|net@1|||900|pwr@0||14|49|V_Generi@0|plus|14|46.5
 Awire|net@2|||2700|top_16x1@0|power|-0.5|34|pwr@1||-0.5|37.5
@@ -10585,7 +10590,6 @@ Awire|net@3|||2700|gnd@1||-0.5|-9|top_16x1@0|ground|-0.5|-8
 Awire|net@22|||0|top_16x1@0|dequeue|-22.5|31|pin@18||-31|31
 Awire|net@23|||2700|gnd@2||-26|38|VPulse@0|minus|-26|39
 Awire|net@24|||2700|VPulse@0|plus|-26|43|pin@19||-26|45
-Awire|net@25|||1800|pin@19||-26|45|pin@20||-13|45
 Awire|net@26|||1800|pin@20||-13|45|pin@21||-12.5|45
 Awire|net@27|||2700|top_16x1@0|1Ghz_clk|-12.5|34|pin@21||-12.5|45
 Awire|net@28|||0|top_16x1@0|in15|-22.5|-4|pin@22||-31|-4
@@ -10603,9 +10607,7 @@ Awire|net@41|||0|top_16x1@0|in6|-22.5|14|pin@28||-31|14
 Awire|net@42|||900|pin@28||-31|14|pin@27||-31|12
 Awire|net@43|||0|top_16x1@0|in5|-22.5|16|pin@29||-31|16
 Awire|net@44|||900|pin@29||-31|16|pin@28||-31|14
-Awire|net@45|||0|top_16x1@0|in4|-22.5|18|pin@30||-31|18
 Awire|net@46|||900|pin@30||-31|18|pin@29||-31|16
-Awire|net@48|||0|top_16x1@0|in0|-22.5|26|pin@32||-38.5|26
 Awire|net@52|||900|pin@35||-38.5|4|pin@34||-38.5|-5
 Awire|net@53|||0|top_16x1@0|in11|-22.5|4|pin@35||-38.5|4
 Awire|net@55|||900|pin@36||-38.5|6|pin@35||-38.5|4
@@ -10623,8 +10625,6 @@ Awire|net@69|||900|pin@32||-38.5|26|pin@41||-38.5|24
 Awire|net@70|||900|pin@41||-38.5|24|pin@40||-38.5|22
 Awire|net@71|||0|top_16x1@0|in1|-22.5|24|pin@41||-38.5|24
 Awire|net@73|||2700|VPWL@1|plus|-38.5|-7.5|pin@34||-38.5|-5
-Awire|net@74|||0|top_16x1@0|enqueue|-22.5|29|pin@42||-45.5|29
-Awire|net@75|||0|pin@18||-31|31|pin@43||-53|31
 Awire|net@76|||900|pin@43||-53|31|pin@44||-53|-5.5
 Awire|net@77|||900|pin@42||-45.5|29|pin@45||-45.5|-4.5
 Awire|net@78|||2700|VPWL@2|plus|-45.5|-7.5|pin@45||-45.5|-4.5
