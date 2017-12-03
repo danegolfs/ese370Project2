@@ -1,7 +1,7 @@
 *** SPICE deck for cell counter_logic_test{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 16:01:14
-*** Last revised on Sat Dec 02, 2017 17:55:06
-*** Written on Sat Dec 02, 2017 18:00:09 by Electric VLSI Design System, version 9.07
+*** Last revised on Sun Dec 03, 2017 17:06:37
+*** Written on Sun Dec 03, 2017 17:06:53 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -44,35 +44,6 @@ Xxor2@2 a2 b2 gnd net@45 pwr ese370project2__xor2
 Xxor2@3 a3 b3 gnd net@42 pwr ese370project2__xor2
 .ENDS ese370project2__comparator
 
-*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
-.SUBCKT ese370project2__inv ground in o power
-Mnmos@0 o in ground ground N L=0.022U W=0.022U
-Mpmos@0 power in o power P L=0.022U W=0.022U
-.ENDS ese370project2__inv
-
-*** SUBCIRCUIT ese370project2__gate_based_latch FROM CELL gate_based_latch{sch}
-.SUBCKT ese370project2__gate_based_latch Ground In Out Phi Power
-Xinv@1 Ground Phi net@22 Power ese370project2__inv
-Xnand2@0 In Phi Ground net@10 Power ese370project2__nand2
-Xnand2@1 net@22 Out Ground net@6 Power ese370project2__nand2
-Xnand2@2 net@10 net@6 Ground Out Power ese370project2__nand2
-.ENDS ese370project2__gate_based_latch
-
-*** SUBCIRCUIT ese370project2__gate_based_register FROM CELL gate_based_register{sch}
-.SUBCKT ese370project2__gate_based_register Clk0 Clk1 Ground In Out Out_n Power
-Xgate_bas@0 Ground In net@0 Clk0 Power ese370project2__gate_based_latch
-Xgate_bas@1 Ground net@0 Out Clk1 Power ese370project2__gate_based_latch
-Xinv@0 Ground Out Out_n Power ese370project2__inv
-.ENDS ese370project2__gate_based_register
-
-*** SUBCIRCUIT ese370project2__counter FROM CELL counter{sch}
-.SUBCKT ese370project2__counter c0 c1 c2 c3 clk clk_n gnd pwr
-Xgate_bas@0 clk clk_n gnd net@0 c0 net@0 pwr ese370project2__gate_based_register
-Xgate_bas@1 c0 net@0 gnd net@51 c1 net@51 pwr ese370project2__gate_based_register
-Xgate_bas@3 c1 net@51 gnd net@81 c2 net@81 pwr ese370project2__gate_based_register
-Xgate_bas@5 c2 net@81 gnd net@99 c3 net@99 pwr ese370project2__gate_based_register
-.ENDS ese370project2__counter
-
 *** SUBCIRCUIT ese370project2__nand3 FROM CELL nand3{sch}
 .SUBCKT ese370project2__nand3 A B C gnd out pwr
 Mnmos@0 out A net@9 gnd N L=0.022U W=0.022U
@@ -101,15 +72,46 @@ Xbitslice@2 a3 b3 net@31 net@41 gnd pwr s3 ese370project2__bitslice
 Xbitslice@3 a0 b0 gnd net@20 gnd pwr s0 ese370project2__bitslice
 .ENDS ese370project2__four_adder
 
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__gate_based_latch FROM CELL gate_based_latch{sch}
+.SUBCKT ese370project2__gate_based_latch Ground In Out Phi Power
+Xinv@1 Ground Phi net@22 Power ese370project2__inv
+Xnand2@0 In Phi Ground net@10 Power ese370project2__nand2
+Xnand2@1 net@22 Out Ground net@6 Power ese370project2__nand2
+Xnand2@2 net@10 net@6 Ground Out Power ese370project2__nand2
+.ENDS ese370project2__gate_based_latch
+
+*** SUBCIRCUIT ese370project2__gate_based_register FROM CELL gate_based_register{sch}
+.SUBCKT ese370project2__gate_based_register Clk0 Clk1 Ground In Out Out_n Power
+Xgate_bas@0 Ground In net@0 Clk0 Power ese370project2__gate_based_latch
+Xgate_bas@1 Ground net@0 Out Clk1 Power ese370project2__gate_based_latch
+Xinv@0 Ground Out Out_n Power ese370project2__inv
+.ENDS ese370project2__gate_based_register
+
+*** SUBCIRCUIT ese370project2__register_4b FROM CELL register_4b{sch}
+.SUBCKT ese370project2__register_4b clk clk_n ground in0 in1 in2 in3 out0 out1 out2 out3 power
+Xgate_bas@0 clk clk_n ground in0 out0 gate_bas@0_Out_n power ese370project2__gate_based_register
+Xgate_bas@1 clk clk_n ground in1 out1 gate_bas@1_Out_n power ese370project2__gate_based_register
+Xgate_bas@2 clk clk_n ground in2 out2 gate_bas@2_Out_n power ese370project2__gate_based_register
+Xgate_bas@3 clk clk_n ground in3 out3 gate_bas@3_Out_n power ese370project2__gate_based_register
+.ENDS ese370project2__register_4b
+
 *** SUBCIRCUIT ese370project2__counter_logic FROM CELL counter_logic{sch}
-.SUBCKT ese370project2__counter_logic c0 c1 c2 c3 empty full gnd head pwr s0 s1 s2 s3 sum0 sum1 tail
-Xcomparat@0 sum0 sum1 net@182 net@184 c0 c1 c2 c3 gnd full pwr ese370project2__comparator
-Xcomparat@1 s0 s1 s2 s3 c0 c1 c2 c3 gnd empty pwr ese370project2__comparator
-Xcounter@0 s0 s1 s2 s3 head net@52 gnd pwr ese370project2__counter
-Xcounter@1 c0 c1 c2 c3 tail net@58 gnd pwr ese370project2__counter
-Xfour_add@0 s0 s1 s2 s3 pwr gnd gnd gnd gnd pwr sum0 sum1 net@182 net@184 ese370project2__four_adder
-Xinv@0 gnd head net@52 pwr ese370project2__inv
-Xinv@1 gnd tail net@58 pwr ese370project2__inv
+.SUBCKT ese370project2__counter_logic ground head head0 head1 head2 head3 one power sixteen tail tail0 tail1 tail2 tail3 zero
+Xcomparat@0 head0 head1 head2 head3 tail0 tail1 tail2 tail3 ground zero power ese370project2__comparator
+Xcomparat@1 head0 head1 head2 head3 next_tail0 next_tail1 next_tail2 next_tail3 ground one power ese370project2__comparator
+Xcomparat@2 next_head0 next_head1 next_head2 next_head3 tail0 tail1 tail2 tail3 ground sixteen power ese370project2__comparator
+Xfour_add@1 power ground ground ground head0 head1 head2 head3 ground power next_head0 next_head1 next_head2 next_head3 ese370project2__four_adder
+Xfour_add@2 power ground ground ground tail0 tail1 tail2 tail3 ground power next_tail0 next_tail1 next_tail2 next_tail3 ese370project2__four_adder
+Xinv@0 ground head net@270 power ese370project2__inv
+Xinv@1 ground tail net@261 power ese370project2__inv
+Xregister@0 head net@270 ground next_head0 next_head1 next_head2 next_head3 head0 head1 head2 head3 power ese370project2__register_4b
+Xregister@1 tail net@261 ground next_tail0 next_tail1 next_tail2 next_tail3 tail0 tail1 tail2 tail3 power ese370project2__register_4b
 .ENDS ese370project2__counter_logic
 
 .global gnd vdd
@@ -118,5 +120,5 @@ Xinv@1 gnd tail net@58 pwr ese370project2__inv
 VVPWL@0 tail gnd pwl (0ns 0 1.99ns 0 2ns 0.8 2.99ns 0.8 3ns 0) DC 0V AC 0V 0
 VVPWL@1 head gnd pwl (0ps 0 0.99ns 0 1ns 0.8 1.99ns 0.8 2ns 0 2.99ns 0 3ns 0.8) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
-Xcounter_@0 c0 c1 c2 c3 empty full gnd head vdd s0 s1 s2 s3 sum0 sum1 tail ese370project2__counter_logic
+Xcounter_@1 gnd head net_head0 net_head1 net_head2 net_head3 net_1 vdd net_16 tail net_tail0 net_tail1 net_tail2 net_tail3 net_0 ese370project2__counter_logic
 .END

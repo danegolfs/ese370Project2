@@ -1,7 +1,7 @@
 *** SPICE deck for cell control_logic_test{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 13:02:05
-*** Last revised on Sat Dec 02, 2017 18:22:58
-*** Written on Sat Dec 02, 2017 18:23:02 by Electric VLSI Design System, version 9.07
+*** Last revised on Sun Dec 03, 2017 00:34:49
+*** Written on Sun Dec 03, 2017 00:35:56 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -21,20 +21,28 @@ Mnmos@0 o in ground ground N L=0.022U W=0.022U
 Mpmos@0 power in o power P L=0.022U W=0.022U
 .ENDS ese370project2__inv
 
-*** SUBCIRCUIT ese370project2__nor2 FROM CELL nor2{sch}
-.SUBCKT ese370project2__nor2 A B Ground Out Power
-Mnmos@0 Out A Ground Ground N L=0.022U W=0.022U
-Mnmos@1 Out B Ground Ground N L=0.022U W=0.022U
-Mpmos@0 Power A net@0 Power P L=0.022U W=0.022U
-Mpmos@1 net@0 B Out Power P L=0.022U W=0.022U
-.ENDS ese370project2__nor2
+*** SUBCIRCUIT ese370project2__nor2_clock FROM CELL nor2_clock{sch}
+.SUBCKT ese370project2__nor2_clock A B Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.352U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.352U
+Mpmos@0 Power A net@0 Power P L=0.022U W=0.352U
+Mpmos@1 net@0 B Out Power P L=0.022U W=0.352U
+.ENDS ese370project2__nor2_clock
 
 *** SUBCIRCUIT ese370project2__clock_gen FROM CELL clock_gen{sch}
 .SUBCKT ese370project2__clock_gen clk clk_n ground in power
-Xbuffer@0 ground in net@1 power ese370project2__buffer
-Xinv@0 ground in net@0 power ese370project2__inv
-Xnor2@0 net@0 clk_n ground clk power ese370project2__nor2
-Xnor2@1 clk net@1 ground clk_n power ese370project2__nor2
+Mnmos@0 net@90 net@38 ground ground N L=0.022U W=0.704U
+Mnmos@1 clk net@90 ground ground N L=0.022U W=1.408U
+Mnmos@2 net@113 net@41 ground ground N L=0.022U W=0.704U
+Mnmos@3 clk_n net@113 ground ground N L=0.022U W=1.408U
+Mpmos@0 power net@38 net@90 power P L=0.022U W=0.704U
+Mpmos@1 power net@90 clk power P L=0.022U W=1.408U
+Mpmos@2 power net@41 net@113 power P L=0.022U W=0.704U
+Mpmos@3 power net@113 clk_n power P L=0.022U W=1.408U
+Xbuffer@0 ground in net@74 power ese370project2__buffer
+Xinv@0 ground in net@67 power ese370project2__inv
+Xnor2_clo@0 net@67 net@41 ground net@38 power ese370project2__nor2_clock
+Xnor2_clo@1 net@38 net@74 ground net@41 power ese370project2__nor2_clock
 .ENDS ese370project2__clock_gen
 
 *** SUBCIRCUIT ese370project2__nand2 FROM CELL nand2{sch}
@@ -134,28 +142,44 @@ Xbitslice@3 a0 b0 gnd net@20 gnd pwr s0 ese370project2__bitslice
 .ENDS ese370project2__four_adder
 
 *** SUBCIRCUIT ese370project2__counter_logic FROM CELL counter_logic{sch}
-.SUBCKT ese370project2__counter_logic c0 c1 c2 c3 empty full gnd head pwr s0 s1 s2 s3 sum0 sum1 tail
-Xcomparat@0 sum0 sum1 net@182 net@184 c0 c1 c2 c3 gnd full pwr ese370project2__comparator
-Xcomparat@1 s0 s1 s2 s3 c0 c1 c2 c3 gnd empty pwr ese370project2__comparator
-Xcounter@0 s0 s1 s2 s3 head net@52 gnd pwr ese370project2__counter
-Xcounter@1 c0 c1 c2 c3 tail net@58 gnd pwr ese370project2__counter
-Xfour_add@0 s0 s1 s2 s3 pwr gnd gnd gnd gnd pwr sum0 sum1 net@182 net@184 ese370project2__four_adder
-Xinv@0 gnd head net@52 pwr ese370project2__inv
-Xinv@1 gnd tail net@58 pwr ese370project2__inv
+.SUBCKT ese370project2__counter_logic empty full ground head head0 head1 head2 head3 power tail tail0 tail1 tail2 tail3
+Xcomparat@0 net@226 net@225 net@182 net@184 tail0 tail1 tail2 tail3 ground full power ese370project2__comparator
+Xcomparat@1 head0 head1 head2 head3 tail0 tail1 tail2 tail3 ground empty power ese370project2__comparator
+Xcounter@0 head0 head1 head2 head3 head net@52 ground power ese370project2__counter
+Xcounter@1 tail0 tail1 tail2 tail3 tail net@58 ground power ese370project2__counter
+Xfour_add@0 head0 head1 head2 head3 power ground ground ground ground power net@226 net@225 net@182 net@184 ese370project2__four_adder
+Xinv@0 ground head net@52 power ese370project2__inv
+Xinv@1 ground tail net@58 power ese370project2__inv
 .ENDS ese370project2__counter_logic
 
+*** SUBCIRCUIT ese370project2__nor2 FROM CELL nor2{sch}
+.SUBCKT ese370project2__nor2 A B Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.022U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A net@0 Power P L=0.022U W=0.022U
+Mpmos@1 net@0 B Out Power P L=0.022U W=0.022U
+.ENDS ese370project2__nor2
+
 *** SUBCIRCUIT ese370project2__control_logic FROM CELL control_logic{sch}
-.SUBCKT ese370project2__control_logic deq empty enq full ghz gnd mhz pwr read write
-Xcounter_@0 counter_@0_c0 counter_@0_c1 counter_@0_c2 counter_@0_c3 empty full gnd write pwr counter_@0_s0 counter_@0_s1 counter_@0_s2 counter_@0_s3 counter_@0_sum0 counter_@0_sum1 read ese370project2__counter_logic
-Xinv@0 gnd net@188 read pwr ese370project2__inv
-Xinv@1 gnd net@230 write pwr ese370project2__inv
+.SUBCKT ese370project2__control_logic deq empty enq full ghz gnd head0 head1 head2 head3 mhz pwr read tail0 tail1 tail2 tail3 write
+Mnmos@0 net@287 net@130 gnd gnd N L=0.022U W=0.088U
+Mnmos@1 read net@287 gnd gnd N L=0.022U W=0.352U
+Mnmos@2 net@310 net@127 gnd gnd N L=0.022U W=0.088U
+Mnmos@3 write net@310 gnd gnd N L=0.022U W=0.352U
+Mpmos@0 pwr net@130 net@287 pwr P L=0.022U W=0.088U
+Mpmos@1 pwr net@287 read pwr P L=0.022U W=0.352U
+Mpmos@2 pwr net@127 net@310 pwr P L=0.022U W=0.088U
+Mpmos@3 pwr net@310 write pwr P L=0.022U W=0.352U
+Xcounter_@0 empty full gnd net@127 head0 head1 head2 head3 pwr net@130 tail0 tail1 tail2 tail3 ese370project2__counter_logic
+Xinv@0 gnd net@188 net@130 pwr ese370project2__inv
+Xinv@1 gnd net@230 net@127 pwr ese370project2__inv
 Xinv@3 gnd net@34 net@38 pwr ese370project2__inv
 Xinv@4 gnd ghz net@91 pwr ese370project2__inv
-Xinv@5 gnd full net@173 pwr ese370project2__inv
-Xinv@6 gnd empty net@151 pwr ese370project2__inv
+Xinv@8 gnd empty net@200 pwr ese370project2__inv
+Xinv@9 gnd full net@175 pwr ese370project2__inv
 Xnand2@3 net@91 mhz gnd net@34 pwr ese370project2__nand2
-Xnand3@2 enq net@173 net@38 gnd net@230 pwr ese370project2__nand3
-Xnand3@3 net@82 net@151 deq gnd net@188 pwr ese370project2__nand3
+Xnand3@2 enq net@175 net@38 gnd net@230 pwr ese370project2__nand3
+Xnand3@3 net@82 net@200 deq gnd net@188 pwr ese370project2__nand3
 Xnor2@1 ghz mhz gnd net@82 pwr ese370project2__nor2
 .ENDS ese370project2__control_logic
 
@@ -167,5 +191,5 @@ VVPWL@1 enq gnd pwl (0ns 0.8 0.99ns 0.8 1ns 0 2ns 0 2.01 0.8) DC 0V AC 0V 0
 VVPulse@0 net@29 gnd pulse (0 0.8V 0ns 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
 Xclock_bo@0 ghz clock_bo@0_1Ghz_n mhz clock_bo@0_500Mhz_n gnd net@29 vdd ese370project2__clock_box
-Xcontrol_@0 deq empty enq full ghz gnd mhz vdd read write ese370project2__control_logic
+Xcontrol_@0 deq empty enq full ghz gnd head0 head1 head2 head3 mhz vdd read tail0 tail1 tail2 tail3 write ese370project2__control_logic
 .END
