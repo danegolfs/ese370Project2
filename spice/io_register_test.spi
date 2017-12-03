@@ -1,0 +1,92 @@
+*** SPICE deck for cell io_register_test{sch} from library ese370project2
+*** Created on Sat Dec 02, 2017 20:06:28
+*** Last revised on Sat Dec 02, 2017 20:26:27
+*** Written on Sat Dec 02, 2017 20:31:05 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__buffer FROM CELL buffer{sch}
+.SUBCKT ese370project2__buffer ground in o power
+Mnmos@0 net@13 in ground ground N L=0.022U W=0.022U
+Mnmos@1 o net@13 ground ground N L=0.022U W=0.022U
+Mpmos@0 power in net@13 power P L=0.022U W=0.022U
+Mpmos@1 power net@13 o power P L=0.022U W=0.022U
+.ENDS ese370project2__buffer
+
+*** SUBCIRCUIT ese370project2__inv FROM CELL inv{sch}
+.SUBCKT ese370project2__inv ground in o power
+Mnmos@0 o in ground ground N L=0.022U W=0.022U
+Mpmos@0 power in o power P L=0.022U W=0.022U
+.ENDS ese370project2__inv
+
+*** SUBCIRCUIT ese370project2__nor2_clock FROM CELL nor2_clock{sch}
+.SUBCKT ese370project2__nor2_clock A B Ground Out Power
+Mnmos@0 Out A Ground Ground N L=0.022U W=0.704U
+Mnmos@1 Out B Ground Ground N L=0.022U W=0.704U
+Mpmos@0 Power A net@0 Power P L=0.022U W=1.408U
+Mpmos@1 net@0 B Out Power P L=0.022U W=1.408U
+.ENDS ese370project2__nor2_clock
+
+*** SUBCIRCUIT ese370project2__clock_gen FROM CELL clock_gen{sch}
+.SUBCKT ese370project2__clock_gen clk clk_n ground in power
+Xbuffer@0 ground in net@74 power ese370project2__buffer
+Xinv@0 ground in net@67 power ese370project2__inv
+Xnor2_clo@0 net@67 clk_n ground clk power ese370project2__nor2_clock
+Xnor2_clo@1 clk net@74 ground clk_n power ese370project2__nor2_clock
+.ENDS ese370project2__clock_gen
+
+*** SUBCIRCUIT ese370project2__nand2 FROM CELL nand2{sch}
+.SUBCKT ese370project2__nand2 A B Ground O Power
+Mnmos@0 O A net@36 Ground N L=0.022U W=0.022U
+Mnmos@1 net@36 B Ground Ground N L=0.022U W=0.022U
+Mpmos@0 Power A O Power P L=0.022U W=0.022U
+Mpmos@1 Power B O Power P L=0.022U W=0.022U
+.ENDS ese370project2__nand2
+
+*** SUBCIRCUIT ese370project2__gate_based_latch FROM CELL gate_based_latch{sch}
+.SUBCKT ese370project2__gate_based_latch Ground In Out Phi Power
+Xinv@1 Ground Phi net@22 Power ese370project2__inv
+Xnand2@0 In Phi Ground net@10 Power ese370project2__nand2
+Xnand2@1 net@22 Out Ground net@6 Power ese370project2__nand2
+Xnand2@2 net@10 net@6 Ground Out Power ese370project2__nand2
+.ENDS ese370project2__gate_based_latch
+
+*** SUBCIRCUIT ese370project2__gate_based_register FROM CELL gate_based_register{sch}
+.SUBCKT ese370project2__gate_based_register Clk0 Clk1 Ground In Out Out_n Power
+Xgate_bas@0 Ground In net@0 Clk0 Power ese370project2__gate_based_latch
+Xgate_bas@1 Ground net@0 Out Clk1 Power ese370project2__gate_based_latch
+Xinv@0 Ground Out Out_n Power ese370project2__inv
+.ENDS ese370project2__gate_based_register
+
+*** SUBCIRCUIT ese370project2__io_register FROM CELL io_register{sch}
+.SUBCKT ese370project2__io_register clk clk_n gnd i0 i1 i10 i11 i12 i13 i14 i15 i2 i3 i4 i5 i6 i7 i8 i9 i_deq i_enq o0 o1 o10 o11 o12 o13 o14 o15 o2 o3 o4 o5 o6 o7 o8 o9 o_deq o_enq pwr
+Xgate_bas@0 clk clk_n gnd i0 o0 gate_bas@0_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@1 clk clk_n gnd i1 o1 gate_bas@1_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@2 clk clk_n gnd i2 o2 gate_bas@2_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@3 clk clk_n gnd i3 o3 gate_bas@3_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@4 clk clk_n gnd i4 o4 gate_bas@4_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@5 clk clk_n gnd i5 o5 gate_bas@5_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@6 clk clk_n gnd i6 o6 gate_bas@6_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@7 clk clk_n gnd i7 o7 gate_bas@7_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@8 clk clk_n gnd i8 o8 gate_bas@8_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@9 clk clk_n gnd i9 o9 gate_bas@9_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@10 clk clk_n gnd i10 o10 gate_bas@10_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@11 clk clk_n gnd i11 o11 gate_bas@11_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@12 clk clk_n gnd i12 o12 gate_bas@12_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@13 clk clk_n gnd i13 o13 gate_bas@13_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@14 clk clk_n gnd i14 o14 gate_bas@14_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@15 clk clk_n gnd i15 o15 gate_bas@15_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@16 clk clk_n gnd i_enq o_enq gate_bas@16_Out_n pwr ese370project2__gate_based_register
+Xgate_bas@17 clk clk_n gnd i_deq o_deq gate_bas@17_Out_n pwr ese370project2__gate_based_register
+.ENDS ese370project2__io_register
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: io_register_test{sch}
+VVPulse@0 pulse gnd pulse (0 0.8V 0ns 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xclock_ge@0 clk clk_n gnd pulse vdd ese370project2__clock_gen
+Xio_regis@0 clk clk_n gnd gnd vdd gnd gnd gnd gnd gnd gnd gnd gnd gnd gnd gnd gnd gnd gnd vdd vdd o0 o1 o10 o11 o12 o13 o14 o15 o2 o3 o4 o5 o6 o7 o8 o9 o_deq o_enq vdd ese370project2__io_register
+.END
