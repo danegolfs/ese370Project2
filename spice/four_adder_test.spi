@@ -1,7 +1,7 @@
 *** SPICE deck for cell four_adder_test{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 16:17:27
 *** Last revised on Sat Dec 02, 2017 16:21:54
-*** Written on Sat Dec 02, 2017 16:22:20 by Electric VLSI Design System, version 9.07
+*** Written on Sat Dec 02, 2017 17:59:47 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -16,15 +16,13 @@ Mpmos@1 Power B O Power P L=0.022U W=0.022U
 .ENDS ese370project2__nand2
 
 *** SUBCIRCUIT ese370project2__nand3 FROM CELL nand3{sch}
-.SUBCKT ese370project2__nand3 A B C out
-** GLOBAL gnd
-** GLOBAL vdd
+.SUBCKT ese370project2__nand3 A B C gnd out pwr
 Mnmos@0 out A net@9 gnd N L=0.022U W=0.022U
 Mnmos@1 net@9 B net@10 gnd N L=0.022U W=0.022U
 Mnmos@2 net@10 C gnd gnd N L=0.022U W=0.022U
-Mpmos@0 vdd C out vdd P L=0.022U W=0.022U
-Mpmos@1 vdd B out vdd P L=0.022U W=0.022U
-Mpmos@2 vdd A out vdd P L=0.022U W=0.022U
+Mpmos@0 pwr C out pwr P L=0.022U W=0.022U
+Mpmos@1 pwr B out pwr P L=0.022U W=0.022U
+Mpmos@2 pwr A out pwr P L=0.022U W=0.022U
 .ENDS ese370project2__nand3
 
 *** SUBCIRCUIT ese370project2__xor2 FROM CELL xor2{sch}
@@ -37,20 +35,16 @@ Xnand2@3 net@3 net@0 gnd out pwr ese370project2__nand2
 
 *** SUBCIRCUIT ese370project2__bitslice FROM CELL bitslice{sch}
 .SUBCKT ese370project2__bitslice A B Cin Cout gnd pwr S
-** GLOBAL gnd
-** GLOBAL vdd
 Xnand2@0 A Cin gnd net@5 pwr ese370project2__nand2
 Xnand2@1 A B gnd net@107 pwr ese370project2__nand2
 Xnand2@2 B Cin gnd net@1 pwr ese370project2__nand2
-Xnand3@0 net@5 net@107 net@1 Cout ese370project2__nand3
+Xnand3@0 net@5 net@107 net@1 gnd Cout pwr ese370project2__nand3
 Xxor2@0 B A gnd net@9 pwr ese370project2__xor2
 Xxor2@1 net@9 Cin gnd S pwr ese370project2__xor2
 .ENDS ese370project2__bitslice
 
 *** SUBCIRCUIT ese370project2__four_adder FROM CELL four_adder{sch}
 .SUBCKT ese370project2__four_adder a0 a1 a2 a3 b0 b1 b2 b3 gnd pwr s0 s1 s2 s3
-** GLOBAL gnd
-** GLOBAL vdd
 Xbitslice@0 a1 b1 net@20 net@26 gnd pwr s1 ese370project2__bitslice
 Xbitslice@1 a2 b2 net@26 net@31 gnd pwr s2 ese370project2__bitslice
 Xbitslice@2 a3 b3 net@31 net@41 gnd pwr s3 ese370project2__bitslice
