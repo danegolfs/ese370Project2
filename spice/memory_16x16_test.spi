@@ -1,7 +1,7 @@
 *** SPICE deck for cell memory_16x16_test{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 13:36:08
-*** Last revised on Sat Dec 02, 2017 16:19:39
-*** Written on Sat Dec 02, 2017 16:19:45 by Electric VLSI Design System, version 9.07
+*** Last revised on Sat Dec 02, 2017 18:34:45
+*** Written on Sat Dec 02, 2017 18:34:53 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -234,15 +234,17 @@ Xvoltage_@15 pc_en ground power net@928 ese370project2__voltage_reference_gen
 *** TOP LEVEL CELL: memory_16x16_test{sch}
 Mnmos@0 net_pc_en net_clk gnd gnd N L=0.022U W=0.352U
 Mpmos@0 vdd net_clk net_pc_en vdd P L=0.022U W=0.352U
-VVPWL@1 net_drive_en gnd pwl (0ns 0 500ps 0 510ps 0.8 990ps 0.8 1ns 0) DC 0V AC 0V 0
-VVPWL@3 net_sense_en gnd pwl (0ns 0 1500ps 0 1510ps 0.8 1950ps 0.8 2ns 0 2500ps 0 2510ps 0.8 2990ps 0.8 3ns 0 ) DC 0V AC 0V 0
-VVPulse@0 net_addr0 gnd pulse (0 0.8V 1ns 10ps 10ps 3ns 6ns) DC 0V AC 0V 0
-VVPulse@1 net_addr1 gnd pulse (0 0.8V 2ns 10ps 10ps 6ns 12ns) DC 0V AC 0V 0
-VVPulse@2 net_addr2 gnd pulse (0 0.8V 4ns 10ps 10ps 12ns 24ns) DC 0V AC 0V 0
-VVPulse@3 net_addr3 gnd pulse (0 0.8V 8ns 10ps 10ps 24ns 48ns) DC 0V AC 0V 0
+VVPWL@1 net_drive_en gnd pwl (0ns 0 500ps 0 510ps 0.8 990ps 0.8 1ns 0 3500ps 0 3510ps 0.8 3990ps 0.8 4ns 0 6500ps 0 6510ps 0.8 6990ps 0.8 7ns 0 9500ps 0 9510ps 0.8 9990ps 0.8 10ns 0 12500ps 0 12510ps 0.8 12990ps 0.8 13ns 0 15500ps 0 15510ps 0.8 15990ps 0.8 16ns 0 18500ps 0 18510ps 0.8 18990ps 0.8 19ns 0 21500ps 0 21510ps 0.8 21990ps 0.8 22ns 0 24500ps 0 24510ps 0.8 24990ps 0.8 25ns 0 27500ps 0 27510ps 0.8 27990ps 0.8 28ns 0 30500ps 0 30510ps 0.8 30990ps 0.8 31ns 0 33500ps 0 33510ps 0.8 33990ps 0.8 34ns 0 
++36500ps 0 36510ps 0.8 36990ps 0.8 37ns 0 39500ps 0 39510ps 0.8 39990ps 0.8 40ns 0 42500ps 0 42510ps 0.8 42990ps 0.8 43ns 0 45500ps 0 45510ps 0.8 45990ps 0.8 46ns 0 48500ps 0 48510ps 0.8 48990ps 0.8 49ns 0) DC 0V AC 0V 0
+VVPWL@3 net_sense_en gnd pwl (0ns 0 01510ps 0 01520ps 0.8 01950ps 0.8 02ns 0 02510ps 0 02520ps 0.8 02990ps 0.8 03ns 0 04510ps 0 04520ps 0.8 04950ps 0.8 05ns 0 05510ps 0 05520ps 0.8 05990ps 0.8 06ns 0 07510ps 0 07520ps 0.8 07950ps 0.8 08ns 0 08510ps 0 08520ps 0.8 08990ps 0.8 09ns 0 10510ps 0 10520ps 0.8 10950ps 0.8 11ns 0 11510ps 0 11520ps 0.8 11990ps 0.8 12ns 0 13510ps 0 13520ps 0.8 13950ps 0.8 14ns 0 14510ps 0 14520ps 0.8 14990ps 0.8 15ns 0 16510ps 0 16520ps 0.8 16950ps 0.8 17ns 0 17510ps 0 17520ps 0.8 
++17990ps 0.8 18ns 0 19510ps 0 19520ps 0.8 19950ps 0.8 20ns 0 20510ps 0 20520ps 0.8 20990ps 0.8 21ns 0 22510ps 0 22520ps 0.8 22950ps 0.8 23ns 0 23510ps 0 23520ps 0.8 23990ps 0.8 24ns 0 25510ps 0 25520ps 0.8 25950ps 0.8 26ns 0 26510ps 0 26520ps 0.8 26990ps 0.8 27ns 0 28510ps 0 28520ps 0.8 28950ps 0.8 29ns 0 29510ps 0 29520ps 0.8 29990ps 0.8 30ns 0 31510ps 0 31520ps 0.8 31950ps 0.8 32ns 0 32510ps 0 32520ps 0.8 32990ps 0.8 33ns 0 34510ps 0 34520ps 0.8 34950ps 0.8 35ns 0 35510ps 0 35520ps 0.8 35990ps 0.8 36ns 0 
++37510ps 0 37520ps 0.8 37950ps 0.8 38ns 0 38510ps 0 38520ps 0.8 38990ps 0.8 39ns 0 40510ps 0 40520ps 0.8 40950ps 0.8 41ns 0 41510ps 0 41520ps 0.8 41990ps 0.8 42ns 0 43510ps 0 43520ps 0.8 43950ps 0.8 44ns 0 44510ps 0 44520ps 0.8 44990ps 0.8 45ns 0 46510ps 0 46520ps 0.8 46950ps 0.8 47ns 0 47510ps 0 47520ps 0.8 47990ps 0.8 48ns 0 49510ps 0 49520ps 0.8 49950ps 0.8 50ns 0 50510ps 0 50520ps 0.8 50990ps 0.8 51ns 0 ) DC 0V AC 0V 0
+VVPulse@0 net_addr0 gnd pulse (0 0.8V 3ns 10ps 10ps 3ns 6ns) DC 0V AC 0V 0
+VVPulse@1 net_addr1 gnd pulse (0 0.8V 6ns 10ps 10ps 6ns 12ns) DC 0V AC 0V 0
+VVPulse@2 net_addr2 gnd pulse (0 0.8V 12ns 10ps 10ps 12ns 24ns) DC 0V AC 0V 0
+VVPulse@3 net_addr3 gnd pulse (0 0.8V 24ns 10ps 10ps 24ns 48ns) DC 0V AC 0V 0
 VVPulse@4 net_clk gnd pulse (0 0.8V 500ps 10ps 10ps 500ps 1ns) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
 Xdecoder_@0 net_addr0 net_addr1 net_addr2 net_addr3 net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 gnd vdd net_clk ese370project2__decoder_4_16
-Xdecoder_@1 gnd vdd vdd vdd net_d0 net_d1 net_d10 net_d11 net_d12 net_d13 net_d14 net_d14 net_d2 net_d3 net_d4 net_d5 net_d6 net_d7 net_d8 net_d9 gnd vdd vdd ese370project2__decoder_4_16
-Xmemory_1@0 net_d0 net_d1 net_d10 net_d11 net_d12 net_d13 net_d14 net_d14 net_d2 net_d3 net_d4 net_d5 net_d6 net_d7 net_d8 net_d9 net_drive_en gnd net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_pc_en vdd net_sense_en net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ese370project2__memory_16x16
+Xmemory_1@0 vdd vdd vdd vdd gnd gnd gnd gnd vdd vdd gnd gnd gnd gnd vdd vdd net_drive_en gnd net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_pc_en vdd net_sense_en net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ese370project2__memory_16x16
 .END

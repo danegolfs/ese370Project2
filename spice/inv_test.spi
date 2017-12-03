@@ -1,0 +1,29 @@
+*** SPICE deck for cell inv_test{sch} from library ese370project2
+*** Created on Sat Dec 02, 2017 17:01:36
+*** Last revised on Sat Dec 02, 2017 17:15:36
+*** Written on Sat Dec 02, 2017 17:44:42 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+* Model cards are described in this file:
+.include 22nm_HP.pm
+
+*** SUBCIRCUIT ese370project2__inv-n_width_1-p_width_1 FROM CELL inv{sch}
+.SUBCKT ese370project2__inv-n_width_1-p_width_1 ground in o power
+Mnmos@0 o in ground ground N L=0.022U
+Mpmos@0 power in o power P L=0.022U
+.ENDS ese370project2__inv-n_width_1-p_width_1
+
+*** SUBCIRCUIT ese370project2__inv-n_width_64-p_width_64 FROM CELL inv{sch}
+.SUBCKT ese370project2__inv-n_width_64-p_width_64 ground in o power
+Mnmos@0 o in ground ground N L=0.022U
+Mpmos@0 power in o power P L=0.022U
+.ENDS ese370project2__inv-n_width_64-p_width_64
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: inv_test{sch}
+VVPulse@0 net_in gnd pulse (0 0.8V 0ns 10ps 10ps 1ns 2ns) DC 0V AC 0V 0
+VV_Generi@0 vdd gnd DC 0.8 AC 0
+Xinv@0 gnd net_in net_out0 vdd ese370project2__inv-n_width_1-p_width_1
+Xinv@1 gnd net_out0 net_out1 vdd ese370project2__inv-n_width_64-p_width_64
+.END

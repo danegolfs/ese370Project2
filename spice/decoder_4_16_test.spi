@@ -1,7 +1,7 @@
 *** SPICE deck for cell decoder_4_16_test{sch} from library ese370project2
 *** Created on Thu Nov 30, 2017 19:20:59
-*** Last revised on Sat Dec 02, 2017 15:09:36
-*** Written on Sat Dec 02, 2017 15:10:14 by Electric VLSI Design System, version 9.07
+*** Last revised on Sat Dec 02, 2017 17:00:43
+*** Written on Sat Dec 02, 2017 17:51:01 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
