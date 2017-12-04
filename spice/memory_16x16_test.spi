@@ -1,7 +1,7 @@
 *** SPICE deck for cell memory_16x16_test{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 13:36:08
-*** Last revised on Sat Dec 02, 2017 18:34:45
-*** Written on Sat Dec 02, 2017 18:34:53 by Electric VLSI Design System, version 9.07
+*** Last revised on Sun Dec 03, 2017 19:26:03
+*** Written on Sun Dec 03, 2017 19:26:13 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -246,5 +246,6 @@ VVPulse@3 net_addr3 gnd pulse (0 0.8V 24ns 10ps 10ps 24ns 48ns) DC 0V AC 0V 0
 VVPulse@4 net_clk gnd pulse (0 0.8V 500ps 10ps 10ps 500ps 1ns) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
 Xdecoder_@0 net_addr0 net_addr1 net_addr2 net_addr3 net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 gnd vdd net_clk ese370project2__decoder_4_16
-Xmemory_1@0 vdd vdd vdd vdd gnd gnd gnd gnd vdd vdd gnd gnd gnd gnd vdd vdd net_drive_en gnd net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_pc_en vdd net_sense_en net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ese370project2__memory_16x16
+Xmemory_1@0 net_addr0 net_addr0 net_addr2 net_addr2 net_addr3 net_addr3 net_addr3 net_addr3 net_addr0 net_addr0 net_addr1 net_addr1 net_addr1 net_addr1 net_addr2 net_addr2 net_drive_en gnd net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_pc_en vdd net_sense_en net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 
++ese370project2__memory_16x16
 .END

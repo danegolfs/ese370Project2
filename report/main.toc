@@ -1,0 +1,23 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Design}{2}
+\contentsline {subsection}{\numberline {1.1}Memory}{2}
+\contentsline {subsubsection}{\numberline {1.1.1}Memory Cell}{2}
+\contentsline {subsubsection}{\numberline {1.1.2}Sense Amplifier}{5}
+\contentsline {subsubsection}{\numberline {1.1.3}$\frac {\textbf {Vdd}}{\textbf {2}}$ Reference Generator}{6}
+\contentsline {subsubsection}{\numberline {1.1.4}Bit Line Driver}{8}
+\contentsline {subsubsection}{\numberline {1.1.5}Complete Bit Line}{10}
+\contentsline {subsubsection}{\numberline {1.1.6}16x16 SRAM}{15}
+\contentsline {subsection}{\numberline {1.2}Periphery Circuitry}{23}
+\contentsline {subsubsection}{\numberline {1.2.1}Decoder}{23}
+\contentsline {subsubsection}{\numberline {1.2.2}IO Register}{25}
+\contentsline {subsubsection}{\numberline {1.2.3}Clock Box}{25}
+\contentsline {subsubsection}{\numberline {1.2.4}Control Logic}{25}
+\contentsline {subsection}{\numberline {1.3}Top Level}{26}
+\contentsline {subsection}{\numberline {1.4}Calculations}{29}
+\contentsline {subsubsection}{\numberline {1.4.1}Sizing}{29}
+\contentsline {subsubsection}{\numberline {1.4.2}Capacitance}{31}
+\contentsline {subsubsection}{\numberline {1.4.3}Timing}{32}
+\contentsline {section}{\numberline {2}Metrics}{32}
+\contentsline {subsection}{\numberline {2.1}Area}{32}
+\contentsline {subsection}{\numberline {2.2}Timing}{32}
+\contentsline {section}{\numberline {3}Code of Academic Integrity}{33}
