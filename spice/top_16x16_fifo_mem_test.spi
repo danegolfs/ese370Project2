@@ -1,7 +1,7 @@
 *** SPICE deck for cell top_16x16_fifo_mem_test{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 22:34:10
-*** Last revised on Sat Dec 02, 2017 23:20:29
-*** Written on Sun Dec 03, 2017 17:57:37 by Electric VLSI Design System, version 9.07
+*** Last revised on Sun Dec 03, 2017 22:09:44
+*** Written on Sun Dec 03, 2017 22:13:32 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -415,7 +415,7 @@ Xvoltage_@15 pc_en ground power net@928 ese370project2__voltage_reference_gen
 .ENDS ese370project2__memory_16x16
 
 *** SUBCIRCUIT ese370project2__top_16x16_fifo_mem FROM CELL top_16x16_fifo_mem{sch}
-.SUBCKT ese370project2__top_16x16_fifo_mem _1Ghz_clk dequeue empty enqueue full ground in0 in1 in10 in11 in12 in13 in14 in15 in2 in3 in4 in5 in6 in7 in8 in9 out0 out1 out10 out11 out12 out13 out14 out15 out2 out3 out4 out5 out6 out7 out8 out9 power
+.SUBCKT ese370project2__top_16x16_fifo_mem _1GHz_clk _500MHz_ref dequeue empty enqueue full ground in0 in1 in10 in11 in12 in13 in14 in15 in2 in3 in4 in5 in6 in7 in8 in9 out0 out1 out10 out11 out12 out13 out14 out15 out2 out3 out4 out5 out6 out7 out8 out9 power
 Mnmos@0 net@274 net_read net_raddr_0 ground N L=0.022U W=0.022U
 Mnmos@4 net@274 net_write net_waddr_0 ground N L=0.022U W=0.022U
 Mnmos@5 net@264 net_read net_raddr_1 ground N L=0.022U W=0.022U
@@ -424,11 +424,11 @@ Mnmos@7 net@267 net_read net_raddr_2 ground N L=0.022U W=0.022U
 Mnmos@8 net@267 net_write net_waddr_2 ground N L=0.022U W=0.022U
 Mnmos@9 net@270 net_read net_raddr_3 ground N L=0.022U W=0.022U
 Mnmos@10 net@270 net_write net_waddr_3 ground N L=0.022U W=0.022U
-Xclock_bo@0 net_2clk net_2clk_n net_clk net_clk_n ground _1Ghz_clk power ese370project2__clock_box
-Xcontrol_@1 net_deq_ctl net_enq_ctl net_2clk ground net_waddr_0 net_waddr_1 net_waddr_2 net_waddr_3 net_clk net_empty_ctl net_full_ctl empty full power net_read net_raddr_0 net_raddr_1 net_raddr_2 net_raddr_3 net_write ese370project2__control_logic
+Xclock_bo@0 net_2clk net_2clk_n _500MHz_ref net_clk_n ground _1GHz_clk power ese370project2__clock_box
+Xcontrol_@1 net_deq_ctl net_enq_ctl net_2clk ground net_waddr_0 net_waddr_1 net_waddr_2 net_waddr_3 _500MHz_ref net_empty_ctl net_full_ctl empty full power net_read net_raddr_0 net_raddr_1 net_raddr_2 net_raddr_3 net_write ese370project2__control_logic
 Xdecoder_@0 net@274 net@264 net@267 net@270 net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ground power net_2clk_n ese370project2__decoder_4_16
-Xio_regis@2 net_clk net_clk_n ground net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_full_ctl net_empty_ctl out0 out1 out10 out11 out12 out13 out14 out15 out2 out3 out4 out5 out6 out7 out8 out9 full empty power ese370project2__io_register
-Xio_regis@3 net_clk net_clk_n ground in0 in1 in10 in11 in12 in13 in14 in15 in2 in3 in4 in5 in6 in7 in8 in9 enqueue dequeue net@636 net@633 net@600 net@603 net@606 net@609 net@612 net@615 net@630 net@627 net@624 net@621 net@618 net@591 net@594 net@597 net_enq_ctl net_deq_ctl power ese370project2__io_register
+Xio_regis@2 _500MHz_ref net_clk_n ground net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_full_ctl net_empty_ctl out0 out1 out10 out11 out12 out13 out14 out15 out2 out3 out4 out5 out6 out7 out8 out9 full empty power ese370project2__io_register
+Xio_regis@3 _500MHz_ref net_clk_n ground in0 in1 in10 in11 in12 in13 in14 in15 in2 in3 in4 in5 in6 in7 in8 in9 enqueue dequeue net@636 net@633 net@600 net@603 net@606 net@609 net@612 net@615 net@630 net@627 net@624 net@621 net@618 net@591 net@594 net@597 net_enq_ctl net_deq_ctl power ese370project2__io_register
 Xmemory_1@0 net@636 net@633 net@600 net@603 net@606 net@609 net@612 net@615 net@630 net@627 net@624 net@621 net@618 net@591 net@594 net@597 net_write ground net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_2clk power net_read net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ese370project2__memory_16x16
 .ENDS ese370project2__top_16x16_fifo_mem
 
@@ -441,5 +441,5 @@ VVPWL@2 enq gnd pwl (0ps 0 1ps 0.8 1999ps 0.8 2ns 0 8ns 0 8001ps 0.8 9999ps 0.8 
 VVPWL@3 deq gnd pwl (0ps 0 4ns 0 4001ps 0.8 5999ps 0.8 6ns 0 10ns 0) DC 0V AC 0V 0
 VVPulse@0 clk gnd pulse (0 0.8V 0ns 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
 VV_Generi@0 vdd gnd DC 0.8 AC 0
-Xtop_16x1@0 clk deq empty enq full gnd in_low in_low in_low in_low in_high in_high in_high in_high in_low in_low in_high in_high in_high in_high in_low in_low out0 out1 out10 out11 out12 out13 out14 out15 out2 out3 out4 out5 out6 out7 out8 out9 vdd ese370project2__top_16x16_fifo_mem
+Xtop_16x1@0 clk clk_ref deq empty enq full gnd in_low in_low in_low in_low in_high in_high in_high in_high in_low in_low in_high in_high in_high in_high in_low in_low out0 out1 out10 out11 out12 out13 out14 out15 out2 out3 out4 out5 out6 out7 out8 out9 vdd ese370project2__top_16x16_fifo_mem
 .END

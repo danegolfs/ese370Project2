@@ -434,6 +434,23 @@ The decoder is a 4 to 16 bit decoder and will be used for the periphery circuitr
 	\label{fig:decoderSchematicReset}
 \end{figure}
 
+\textbf{Correctness}\\
+For correctness, we tested every possible input and verified outputs. The outputs from the test schematic (Figure \ref{fig:decoderTestWithResetSchematic}) are working as expected--shown in Figure \ref{fig:decoderTestWithResetWaveform}. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{decoderTestWithResetSchematic}
+	\caption{4 to 16 Bit Decoder Test Schematic}
+	\label{fig:decoderTestWithResetSchematic}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{decoderTestWithResetWaveform}
+	\caption{4 to 16 Bit Decoder Test Waveform}
+	\label{fig:decoderTestWithResetWaveform}
+\end{figure}
+
 \subsubsection{IO Register}
 \label{sec:io_register_design}
 
@@ -484,7 +501,7 @@ The logic module generates the read and write addresses, full and empty signals,
 	\label{fig:topLevelSchematicLogic}
 \end{figure}
 
-The input uses the IO Register to hold all values and guarantee steady inputs.
+The input uses the IO Register to hold all input and output values and guarantee steady inputs.
 
 \begin{figure}[H]
 	\centering
@@ -503,7 +520,25 @@ The output register is latched on the edge of the 16x16 RAM's output signal and 
 \end{figure}
 
 \subsubsection{Validation}
-Put stuff here to prove that it works like expected.
+
+We first tested a single enqueue and dequeue to test that reading and writing works, reading gives output on the correct clock cycle, and the empty singal behaves as expected. Here is the schematic:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{topLevelTestSchematic}
+	\caption{Top Level 16x16 FIFO Test Schematic}
+	\label{fig:topLevelTestSchematic}
+\end{figure}
+
+The waveform in Figure \ref{fig:topLevelTestWaveform} shows the 500MHz that is generated within the FIFO memory block (which is output from the 16x16 FIFO Memory since the input is a 1GHz clock). This figure also shows the enqueue signals and dequeue signals in the second waveform, the output in the third waveform, and the empty singal in the last waveform. Notice that the empty updates on the falling edge after the FIFO Memory is enqueued, and it then rises after that data is dequeued.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{topLevelTestWaveform}
+	\caption{Top Level 16x16 FIFO Test Waveform}
+	\label{fig:topLevelTestWaveform}
+\end{figure}
+
 
 \subsection{Calculations}
 \label{sec:calculations}
