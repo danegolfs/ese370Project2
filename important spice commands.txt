@@ -1,0 +1,29 @@
+
+
+.IC V(xtop_16x1@0.net_addr0) = 0 V(xtop_16x1@0.net_addr1) = 0 V(xtop_16x1@0.net_addr2) = 0 V(xtop_16x1@0.net_addr3) = 0 V(xtop_16x1@0.net_write) = 0.8 V(xtop_16x1@0.net_read) = 0
+
+
+
+.IC V(net_addr0) = 0 V(net_addr1) = 0 V(net_addr2) = 0 V(net_addr3) = 0 V(net_write) = 0.8 V(net_read) = 0
+
+
+meas tran yint integ I(vv_generi@0) from=0ns to=1ns
+
+for dequeueing a 0
+ngspice 2 -> meas tran yint integ I(vv_generi@0) from=5ns to=7ns
+yint                =  -1.74116e-12 from=  5.00000e-09 to=  7.00000e-09
+
+for dequeueing a 1
+ngspice 2 -> meas tran yint integ I(vv_generi@0) from=9ns to=11ns
+yint                =  -1.76543e-12 from=  9.00000e-09 to=  1.10000e-08
+
+for enqueueing a 0 to FFFF
+ngspice 2 -> meas tran yint integ I(vv_generi@0) from=7ns to=9ns
+yint                =  -1.78964e-12 from=  7.00000e-09 to=  9.00000e-09
+
+for enqueueing FFFF to 0
+ngspice 2 -> meas tran yint integ I(vv_generi@0) from=11ns to=13ns
+yint                =  -1.82591e-12 from=  1.10000e-08 to=  1.30000e-08
+
+-1.729068e-12
+
