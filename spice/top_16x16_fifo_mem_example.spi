@@ -1,7 +1,7 @@
 *** SPICE deck for cell top_16x16_fifo_mem_example{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 23:40:12
-*** Last revised on Mon Dec 04, 2017 18:52:58
-*** Written on Mon Dec 04, 2017 19:03:49 by Electric VLSI Design System, version 9.07
+*** Last revised on Mon Dec 04, 2017 19:54:42
+*** Written on Mon Dec 04, 2017 19:55:06 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -426,18 +426,18 @@ Xvoltage_@15 pc_en ground power net@928 ese370project2__voltage_reference_gen
 
 *** SUBCIRCUIT ese370project2__tristate_buffer_min_size FROM CELL tristate_buffer_min_size{sch}
 .SUBCKT ese370project2__tristate_buffer_min_size en ground in out power
-Mnmos@0 out net@11 net@31 ground N L=0.022U W=0.022U
+Mnmos@0 out net@11 net@31 ground N L=0.022U W=0.044U
 Mnmos@1 net@11 in ground ground N L=0.022U W=0.022U
-Mnmos@2 net@31 en ground ground N L=0.022U W=0.022U
+Mnmos@2 net@31 en ground ground N L=0.022U W=0.044U
 Mnmos@3 net@1 en ground ground N L=0.022U W=0.022U
-Mpmos@0 net@29 net@11 out power P L=0.022U W=0.022U
+Mpmos@0 net@29 net@11 out power P L=0.022U W=0.044U
 Mpmos@1 power in net@11 power P L=0.022U W=0.022U
-Mpmos@2 power net@1 net@29 power P L=0.022U W=0.022U
+Mpmos@2 power net@1 net@29 power P L=0.022U W=0.044U
 Mpmos@3 power en net@1 power P L=0.022U W=0.022U
 .ENDS ese370project2__tristate_buffer_min_size
 
 .global gnd vdd
-
+.IC V(net_addr0) = 0 V(net_addr1) = 0 V(net_addr2) = 0 V(net_addr3) = 0 V(net_write) = 0.8 V(net_read) = 0 
 *** TOP LEVEL CELL: top_16x16_fifo_mem_example{sch}
 VVPWL@4 enq gnd pwl (0ps 0 1490ps 0 1500ps 0.8 33500ps 0.8 33510ps 0) DC 0V AC 0V 0
 VVPWL@5 deq gnd pwl (0ns 0 33500ps 0 33510ps 0.8 49500ps 0.8 49510ps 0) DC 0V AC 0V 0
@@ -456,12 +456,12 @@ Xio_regis@1 net_clk net_clk_n gnd net_in0 net_in1 net_in10 net_in11 net_in12 net
 Xmemory_1@0 net_d0 net_d1 net_d10 net_d11 net_d12 net_d13 net_d14 net_d15 net_d2 net_d3 net_d4 net_d5 net_d6 net_d7 net_d8 net_d9 net_write gnd net_out0 net_out1 net_out10 net_out11 net_out12 net_out13 net_out14 net_out15 net_out2 net_out3 net_out4 net_out5 net_out6 net_out7 net_out8 net_out9 net_2clk vdd net_read net_w0 net_w1 net_w10 net_w11 net_w12 net_w13 net_w14 net_w15 net_w2 net_w3 net_w4 net_w5 net_w6 net_w7 net_w8 net_w9 ese370project2__memory_16x16
 Xnor2@0 net@324 net_2clk gnd net@390 vdd ese370project2__nor2
 Xnor2@1 net_read net_write gnd net@324 vdd ese370project2__nor2
-Xtristate@4 net_read gnd net_raddr_0 net_addr0 vdd ese370project2__tristate_buffer_min_size
-Xtristate@5 net_write gnd net_waddr_0 net_addr0 vdd ese370project2__tristate_buffer_min_size
-Xtristate@6 net_read gnd net_raddr_1 net_addr1 vdd ese370project2__tristate_buffer_min_size
-Xtristate@7 net_write gnd net_waddr_1 net_addr1 vdd ese370project2__tristate_buffer_min_size
-Xtristate@8 net_read gnd net_raddr_2 net_addr2 vdd ese370project2__tristate_buffer_min_size
-Xtristate@9 net_write gnd net_waddr_2 net_addr2 vdd ese370project2__tristate_buffer_min_size
-Xtristate@10 net_read gnd net_raddr_3 net_addr3 vdd ese370project2__tristate_buffer_min_size
-Xtristate@11 net_write gnd net_waddr_3 net_addr3 vdd ese370project2__tristate_buffer_min_size
+Xtristate@20 net_read gnd net_raddr_0 net_addr0 vdd ese370project2__tristate_buffer_min_size
+Xtristate@36 net_write gnd net_waddr_0 net_addr0 vdd ese370project2__tristate_buffer_min_size
+Xtristate@52 net_read gnd net_raddr_1 net_addr1 vdd ese370project2__tristate_buffer_min_size
+Xtristate@53 net_write gnd net_waddr_1 net_addr1 vdd ese370project2__tristate_buffer_min_size
+Xtristate@56 net_read gnd net_raddr_2 net_addr2 vdd ese370project2__tristate_buffer_min_size
+Xtristate@57 net_write gnd net_waddr_2 net_addr2 vdd ese370project2__tristate_buffer_min_size
+Xtristate@60 net_read gnd net_raddr_3 net_addr3 vdd ese370project2__tristate_buffer_min_size
+Xtristate@61 net_write gnd net_waddr_3 net_addr3 vdd ese370project2__tristate_buffer_min_size
 .END
