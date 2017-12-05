@@ -22,4 +22,8 @@
 \contentsline {section}{\numberline {2}Metrics}{34}
 \contentsline {subsection}{\numberline {2.1}Area}{34}
 \contentsline {subsection}{\numberline {2.2}Timing}{34}
+\contentsline {subsection}{\numberline {2.3}Energy}{35}
+\contentsline {subsubsection}{\numberline {2.3.1}Enqueue Energy}{35}
+\contentsline {subsubsection}{\numberline {2.3.2}Dequeue Energy}{35}
+\contentsline {subsubsection}{\numberline {2.3.3}Enqueue/Dequeue Energy}{35}
 \contentsline {section}{\numberline {3}Code of Academic Integrity}{35}
