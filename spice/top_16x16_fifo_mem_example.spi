@@ -1,7 +1,7 @@
 *** SPICE deck for cell top_16x16_fifo_mem_example{sch} from library ese370project2
 *** Created on Sat Dec 02, 2017 23:40:12
-*** Last revised on Mon Dec 04, 2017 19:54:42
-*** Written on Mon Dec 04, 2017 19:55:06 by Electric VLSI Design System, version 9.07
+*** Last revised on Mon Dec 04, 2017 20:29:17
+*** Written on Mon Dec 04, 2017 20:29:24 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:
@@ -437,10 +437,11 @@ Mpmos@3 power en net@1 power P L=0.022U W=0.022U
 .ENDS ese370project2__tristate_buffer_min_size
 
 .global gnd vdd
-.IC V(net_addr0) = 0 V(net_addr1) = 0 V(net_addr2) = 0 V(net_addr3) = 0 V(net_write) = 0.8 V(net_read) = 0 
+.IC V(net_addr0) = 0 V(net_addr1) = 0 V(net_addr2) = 0 V(net_addr3) = 0 V(net_write) = 0.8 V(net_read) = 0
+
 *** TOP LEVEL CELL: top_16x16_fifo_mem_example{sch}
 VVPWL@4 enq gnd pwl (0ps 0 1490ps 0 1500ps 0.8 33500ps 0.8 33510ps 0) DC 0V AC 0V 0
-VVPWL@5 deq gnd pwl (0ns 0 33500ps 0 33510ps 0.8 49500ps 0.8 49510ps 0) DC 0V AC 0V 0
+VVPWL@5 deq gnd pwl (0ns 0 33500ps 0 33510ps 0.8 65500ps 0.8 65510ps 0) DC 0V AC 0V 0
 VVPulse@1 clk gnd pulse (0 0.8V 500ps 10ps 10ps 0.5ns 1ns) DC 0V AC 0V 0
 VVPulse@2 net_a0 gnd pulse (0.8V 0V 1.9ns 10ps 10ps 2ns 4ns) DC 0V AC 0V 0
 VVPulse@3 net_a1 gnd pulse (0.8V 0V 1.9ns 10ps 10ps 4ns 8ns) DC 0V AC 0V 0
