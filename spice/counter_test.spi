@@ -1,7 +1,7 @@
 *** SPICE deck for cell counter_test{sch} from library ese370project2
-*** Created on Thu Nov 30, 2017 20:12:10
-*** Last revised on Thu Nov 30, 2017 20:58:09
-*** Written on Thu Nov 30, 2017 20:58:34 by Electric VLSI Design System, version 9.07
+*** Created on Thu Nov 30, 2017 17:12:10
+*** Last revised on Sat Dec 02, 2017 12:10:52
+*** Written on Mon Dec 04, 2017 19:01:15 by Electric VLSI Design System, version 9.07
 *** Layout tech: mocmos, foundry MOSIS
 *** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
 * Model cards are described in this file:

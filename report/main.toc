@@ -8,24 +8,26 @@
 \contentsline {subsubsection}{\numberline {1.1.5}Complete Bit Line}{10}
 \contentsline {subsubsection}{\numberline {1.1.6}16x16 SRAM}{15}
 \contentsline {subsection}{\numberline {1.2}Periphery Circuitry}{23}
-\contentsline {subsubsection}{\numberline {1.2.1}Decoder}{23}
-\contentsline {subsubsection}{\numberline {1.2.2}IO Register}{26}
-\contentsline {subsubsection}{\numberline {1.2.3}Clock Box}{26}
-\contentsline {subsubsection}{\numberline {1.2.4}Control Logic}{26}
-\contentsline {subsection}{\numberline {1.3}Top Level}{27}
-\contentsline {subsubsection}{\numberline {1.3.1}Schematic}{27}
-\contentsline {subsubsection}{\numberline {1.3.2}Validation}{30}
-\contentsline {subsection}{\numberline {1.4}Calculations}{33}
-\contentsline {subsubsection}{\numberline {1.4.1}Sizing}{33}
-\contentsline {subsubsection}{\numberline {1.4.2}Capacitance}{35}
-\contentsline {subsubsection}{\numberline {1.4.3}Timing}{36}
-\contentsline {section}{\numberline {2}Metrics}{36}
-\contentsline {subsection}{\numberline {2.1}Area}{36}
-\contentsline {subsection}{\numberline {2.2}Timing}{36}
-\contentsline {subsection}{\numberline {2.3}Energy}{37}
-\contentsline {subsubsection}{\numberline {2.3.1}Enqueue Energy}{37}
-\contentsline {subsubsection}{\numberline {2.3.2}Dequeue Energy}{37}
-\contentsline {subsubsection}{\numberline {2.3.3}Enqueue/Dequeue Energy}{38}
-\contentsline {subsubsection}{\numberline {2.3.4}Standby Energy}{39}
-\contentsline {subsubsection}{\numberline {2.3.5}Average Energy}{39}
-\contentsline {section}{\numberline {3}Code of Academic Integrity}{39}
+\contentsline {subsubsection}{\numberline {1.2.1}Clock Generator}{23}
+\contentsline {subsubsection}{\numberline {1.2.2}Clock Box}{25}
+\contentsline {subsubsection}{\numberline {1.2.3}Comparator}{29}
+\contentsline {subsubsection}{\numberline {1.2.4}Counter}{32}
+\contentsline {subsubsection}{\numberline {1.2.5}Count Logic}{34}
+\contentsline {subsubsection}{\numberline {1.2.6}Control Logic}{36}
+\contentsline {subsubsection}{\numberline {1.2.7}Decoder}{40}
+\contentsline {subsubsection}{\numberline {1.2.8}IO Register}{43}
+\contentsline {subsection}{\numberline {1.3}Top Level}{47}
+\contentsline {subsubsection}{\numberline {1.3.1}Schematic}{47}
+\contentsline {subsubsection}{\numberline {1.3.2}Validation}{50}
+\contentsline {subsection}{\numberline {1.4}Calculations}{52}
+\contentsline {subsubsection}{\numberline {1.4.1}Sizing}{52}
+\contentsline {subsubsection}{\numberline {1.4.2}Capacitance}{54}
+\contentsline {subsubsection}{\numberline {1.4.3}Timing}{54}
+\contentsline {section}{\numberline {2}Metrics}{54}
+\contentsline {subsection}{\numberline {2.1}Area}{54}
+\contentsline {subsection}{\numberline {2.2}Timing}{54}
+\contentsline {subsection}{\numberline {2.3}Energy}{55}
+\contentsline {subsubsection}{\numberline {2.3.1}Enqueue Energy}{55}
+\contentsline {subsubsection}{\numberline {2.3.2}Dequeue Energy}{55}
+\contentsline {subsubsection}{\numberline {2.3.3}Enqueue/Dequeue Energy}{55}
+\contentsline {section}{\numberline {3}Code of Academic Integrity}{55}

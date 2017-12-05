@@ -409,6 +409,212 @@ Lastly, the corresponding waveforms (Figure \ref{fig:memory16x16TestWaveformCtlI
 
 \subsection{Periphery Circuitry}
 
+\subsubsection{Clock Generator}
+\label{sec:clock_generator_design}
+
+To ensure we didn't have issues with overlapping clocks, we made a clock generator circuit which guaranteed a period of time when both $\text{CLK and } \neg{CLK}$ were low. We then used that in the \textbf{Clock Box} circuit to divide our clock. The output clock is buffered by sized inverters to increase the drive of the signal since it is used in over 30 registers and other associated sub-circuitry. Below is the circuit for the clock generator and the associated waveforms.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockGen}
+	\caption{Clock Generator Design}
+	\label{fig:clockGen}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockGenWave}
+	\caption{Clock Generator Waveform}
+	\label{fig:clockGenWave}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockGenOverlap}
+	\caption{Clock Generator Non-Overlap}
+	\label{fig:clockGenOverlap}
+\end{figure}
+
+
+\subsubsection{Clock Box}
+\label{sec:clock_box_design}
+
+For our design, we used an ideal input signal of 1Ghz and then output a complementary 1Ghz non-overlapping clock signal and a complementary 500Mhz non-overlapping clock signal. Below is the design and test bench for it and below that the waveforms with close ups of the non-overlapping fall and rises.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockBox}
+	\caption{Clock Box Design}
+	\label{fig:clockBox}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockBoxTest}
+	\caption{Clock Box Test Bench}
+	\label{fig:clockBoxTest}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockGhz}
+	\caption{1Ghz Clock Signal}
+	\label{fig:clockGhz}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockGhzOverlap}
+	\caption{1Ghz Clock Signal Non-Overlapping}
+	\label{fig:clockGhzOverlap}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockMhz}
+	\caption{500Mhz Clock Signal}
+	\label{fig:clockMhz}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{clockMhzOverlap}
+	\caption{500Mhz Clock Signal Non-Overlapping}
+	\label{fig:clockMhzOverlap}
+\end{figure}
+
+
+\subsubsection{Comparator}
+\label{sec:comparator_design}
+
+In our design we needed to use a comparator to see if two memory addresses were the same (which would mean that the memory cell is empty) or if the head of the queue+1 equaled the tail of the queue (which meant that the queue was full). Below is the design of the comparator along with the associated test and waveform.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{comparator}
+	\caption{Comparator Design}
+	\label{fig:comparator}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{comparatorTest}
+	\caption{Comparator Test Bench}
+	\label{fig:comparatorTest}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{comparatorWaveform}
+	\caption{Comparator Test Waveform}
+	\label{fig:comparatorWaveform}
+\end{figure}
+
+\subsubsection{Counter}
+\label{sec:counter_design}
+
+For our counter mechanism to keep track of memory addresses, we cascaded four registers in series with the outputs of each acting as the clock for the following registers. Below is the circuit design for it and following is the test bench with waveform.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{counter}
+	\caption{Counter Design}
+	\label{fig:counter}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{counterTest}
+	\caption{Counter Test Bench}
+	\label{fig:counterTest}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{counterWaveform}
+	\caption{Counter Test Waveform}
+	\label{fig:counterWaveform}
+\end{figure}
+
+
+\subsubsection{Count Logic}
+\label{sec:count_logic_design}
+
+To help with the control logic, we created a sub-module which gave control signals whether the next iteration would be cause the memory cell to be full, empty, or contain one element. These signals would then be used to control whether a read or a write was allowed. Below is the design for the circuit along with the test bench and waveform.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{counterLogic}
+	\caption{Counter Logic Schematic}
+	\label{fig:counterLogic}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{counterLogicTest}
+	\caption{Counter Logic Test Bench}
+	\label{fig:counterLogicTest}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{counterLogicWaveform}
+	\caption{Counter Logic Test Waveform}
+	\label{fig:counterLogicWaveform}
+\end{figure}
+
+
+\subsubsection{Control Logic}
+\label{sec:control_logic_design}
+
+Our control logic for this project divided up the clock signal to be able to enqueue and dequeue during certain parts of the clock cycle. Specifically, given the 1Ghz clock and 500Mhz clock, the write operation takes place on the low Ghz and Mhz while also having the memory not be full. The read operation occurs on the low Ghz and high Mhz while also not having the memory not be empty. These test waveforms were created with the below circuit and test bench. Finally, the waveforms are given to show the circuit operating properly of these facts are demonstrated by the below test benches.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{controlLogic}
+	\caption{Control Logic Schematic}
+	\label{fig:controlLogic}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.26]{controlLogicTest}
+	\caption{Control Logic Test Bench}
+	\label{fig:controlLogicTest}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{controlRead}
+	\caption{Control Logic: Read Operation}
+	\label{fig:controlRead}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{controlWrite}
+	\caption{Control Logic: Write Operation}
+	\label{fig:controlWrite}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{controlReadNot}
+	\caption{Control Logic: No Read While Empty}
+	\label{fig:controlReadNot}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{controlWriteNot}
+	\caption{Control Logic: No Write While Full}
+	\label{fig:controlWriteNot}
+\end{figure}
+
+You can see that in the read case, the \textbf{read} signal only goes high with $\neg{Ghz} \wedge Mhz \wedge \neg{full}$. Meanwhile, the \textbf{write} signal only goes high with $\neg{Ghz} \wedge \neg{Mhz} \wedge \neg{empty}$.
+
+
+
 \subsubsection{Decoder}
 \label{sec:decoder_design}
 The decoder is a 4 to 16 bit decoder and will be used for the periphery circuitry of the memory cell in the top level design. The schematic (Figure \ref{fig:decoderSchematic}) has two parts: pre-decoding (Figure \ref{fig:decoderSchematicPreDecoder}) and output/reset (Figure \ref{fig:decoderSchematicReset}). The reset is active low so that when the reset is high, all outputs are driven according to the inputs and when reset is low, all outputs are driven low. 
@@ -454,11 +660,32 @@ For correctness, we tested every possible input and verified outputs. The output
 \subsubsection{IO Register}
 \label{sec:io_register_design}
 
-\subsubsection{Clock Box}
-\label{sec:clock_box_design}
+The IO register in this design buffers the inputs and outputs to the memory. It is a relatively simple design with 18 registers in one IO Register cell. Each register is fed the same clock so essentially the whole thing acts like 18 registers.
 
-\subsubsection{Control Logic}
-\label{sec:control_logic_design}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{ioRegister}
+	\caption{IO Register Design}
+	\label{fig:ioRegister}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{ioRegisterTest}
+	\caption{IO Register Test Bench}
+	\label{fig:ioRegisterTest}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{ioRegisterWaveform}
+	\caption{IO Register Test Waveform}
+	\label{fig:ioRegisterWaveform}
+\end{figure}
+
+You can see the ground signal gets latched in on the falling edge of the clock.
+
+
 
 \newpage
 \subsection{Top Level}
