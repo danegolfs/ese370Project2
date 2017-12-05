@@ -537,7 +537,7 @@ For our counter mechanism to keep track of memory addresses, we cascaded four re
 \end{figure}
 
 
-\subsubsection{Count Logic}
+\subsection{Count Logic}
 \label{sec:count_logic_design}
 
 To help with the control logic, we created a sub-module which gave control signals whether the next iteration would be cause the memory cell to be full, empty, or contain one element. These signals would then be used to control whether a read or a write was allowed. Below is the design for the circuit along with the test bench and waveform.
@@ -886,22 +886,58 @@ The calculations above for sizing were constrained by 1GHz operation. Because th
 \label{sec:metrics}
 
 \subsection{Area}
+\textbf{Total Calculation}\\
+16x16 FIFO Memory = 8 $\times$ minimum tri-state buffer + decoder + clock box + 2 $\times$ NOR2 + control logic + 2 $\times$ io register + 16$\times$16 SRAM
 \begin{enumerate}
-\item 16x16 FIFO Memory = 8 $\times$ minimum tri-state buffer + clock box + 2 $\times$ nor2 + control logic + 2 $\times$ io register + 16$\times$16 SRAM
 \item minimum tri-state buffer = 8
-\item clock box = gate based register + 2 $\times$ clock gen + inverter
-\item nor2 = 4
-\item control logic = 9 $\times$ inverter + 7 $\times$ nand2 + counter logic + 80
-\item io register = 
-\item 16$\times$16 SRAM = 
+\item decoder = 20 $\times$ inv + 24 $\times$ NAND2 + 16 $\times$ NOR2 = 200
+\item clock box = gate based register + 2 $\times$ clock gen + inverter = 430
+\subitem gate based register = 30
+\subitem clock gen = 3 $\times$ inv + 2 $\times$ NOR2 + 384 = 398
+\item NOR2 = 4
+\item control logic = 9 $\times$ inverter + 7 $\times$ NAND2 + counter logic + 80 = 954
+\subitem counter logic = 3 $\times$ inv + 2 $\times$ 4-bit register + 2 $\times$ adder + 3 $\times$ comparator = 828
+\subsubitem 4-bit register = 4 $\times$ 30 = 120
+\subsubitem adder = 4 $\times$ bitslice = 184
+\subsubitem  \hspace{0.5cm} bitslice = 46
+\subsubitem comparator = 16 $\times$ 4 + 8 = 72
+\item io register = 18 $\times$ gate based register = 540
+\subitem gate based register = 2 $\times$ latch + inverter = 30
+\subsubitem latch = 1 inverter + 3 $\times$ NAND2 = 14
 
-
-\item memory cell area: 8
-\item total area: $16 \times 8 + 84 + 56 + 56 + 6 = 330$
-\subitem Driver = 84
-\subitem Vref Generator = 56
-\subitem Output Buffers = 6
+\item 16$\times$16 SRAM = 16 $\times$ (Sense Amp + Bit Line + Voltage Ref Gen + Tristate Buffer) = 16 $\times$ (5 + 128 + 56 + 84) = 16 $\times$ 273 = 4368
+\subitem sense amp = 5
+\subitem bit line = 16 $\times$ 5T Cell = 128
+\subsubitem 5T Cell = 8
+\subitem voltage ref gen = 56
+\subitem tristate buffer = 84
 \end{enumerate}
+
+\textbf{Total Addition}\\
+16x16 FIFO Memory = 8 $\times$ 8 + + 200 + 430 + 2 $\times$ 4 + 954 + 2 $\times$ 540 + 4368 = \textbf{7104}
+
+
+
+%\item counter logic = 3 $\times$ inv + 2 $\times$ 4-bit register + 2 $\times$ adder + 3 $\times$ comparator
+%\subitem 4-bit register = 4 $\times$ 30 = 120
+%\subitem adder = 4 $\times$ bitslice = 184
+%\subsubitem bitslice = 46
+%\subitem comparator = 16 $\times$ 4 + 8 = 72\\
+%= 828
+%\item control logic = 9 $\times$ inverter + 7 $\times$ NAND2 + counter logic + 80
+%
+%\item io register = 18 $\times$ gate based register = 540
+%\subitem gate based register = 2 $\times$ latch + inverter = 30
+%\subsubitem latch = 1 inverter + 3 $\times$ NAND2 = 14\\
+%= 540
+%
+%\item 16$\times$16 SRAM = 
+%\item memory cell area: 8
+%\item total area: $16 \times 8 + 84 + 56 + 56 + 6 = 330$
+%\subitem Driver = 84
+%\subitem Vref Generator = 56
+%\subitem Output Buffers = 6
+
 
 \subsection{Timing}
 For timing, we constrained the sizing equations in Section \ref{subsec:sizing_calc} by a 1GHz operation (within 500ps rise time). This is so when we run the entire design at 500MHz, we can enqueue and dequeue in a single 500MHz clock cycle. We used the example bitline schematics above to find the delay from driving the wordline to the output. The delay from the drive of the wordline to the output is 133.111ps (Figure \ref{fig:ioTiming}), which gives ample room to increase as we optimize for energy.
