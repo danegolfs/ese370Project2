@@ -757,7 +757,7 @@ We first tested a single enqueue and dequeue to test that reading and writing wo
 	\label{fig:topLevelTestSchematic}
 \end{figure}
 
-The waveform in Figure \ref{fig:topLevelTestControlWaveform} shows the 500MHz that is generated within the FIFO memory block (which is output from the 16x16 FIFO Memory since the input is a 1GHz clock). This test shows what happens with 16 enqueues and 16 dequeues. The empty signal is low until after the first enqueue, then it goes low. The test continues the enqueue data until the FIFO is full. After the 16th enqueue, the full signal is asserted, then we start dequeueing. After the first dequeue, the full signal goes low. After 16 dequeues, the empty singal is re-asserted. 
+The waveform in Figure \ref{fig:topLevelTestControlWaveform} shows the 500MHz that is generated within the FIFO memory block (which is output from the 16x16 FIFO Memory since the input is a 1GHz clock). This test shows what happens with 16 enqueues and 16 dequeues. The empty signal is high until after the first enqueue, then it goes low. The test continues to enqueue data until the FIFO is full. After the 16th enqueue, the full signal is asserted, then we start dequeueing. After the first dequeue, the full signal goes low. After 16 dequeues, the empty singal is re-asserted.
 
 \begin{figure}[H]
 	\centering
