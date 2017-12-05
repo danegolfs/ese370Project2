@@ -701,7 +701,7 @@ The entire schematic is below in Figure \ref{fig:topLevelSchematic}.
 	\label{fig:topLevelSchematic}
 \end{figure}
 
-The addresses are different for read and write, so we need an enable for both addresses. We use pass transistors to achieve this. The inputs of the decoder are robust enough to handle the $V_th$ drop caused by the enable transistor.
+The addresses are different for read and write, so we need an enable for both addresses. We use a minimum-sized tri-state buffer to achieve this. There is also logic connected to $rst\_n$ on the decoder. This prevents a wordline going high based on the inputs if we are neither reading nor writing, but ensures that when the 1GHz clock is low, the wordlines are driven low so that the pre-charge module does not overwrite the values stored in the SRAM.
 
 \begin{figure}[H]
 	\centering
@@ -922,8 +922,8 @@ $$0x0000 \rightarrow 0xFFFF = 1.78964pW\textnormal{ (from $7ns \rightarrow 9ns$)
 $$0xFFFF \rightarrow 0x0000 = 1.82591pW\textnormal{ (from $11ns \rightarrow 13ns$)}$$
 \subsubsection{Dequeue Energy}
 This was a test for dequeueing a single value. We tested both $0x0000$ and $0xFFFF$
-$$0x0000 = 1.74116W\textnormal{ (from $5ns \rightarrow 7ns$)}$$
-$$0xFFFF = 1.76543W\textnormal{ (from $9ns \rightarrow 11ns$)}$$
+$$0x0000 = 1.74116pW\textnormal{ (from $5ns \rightarrow 7ns$)}$$
+$$0xFFFF = 1.76543pW\textnormal{ (from $9ns \rightarrow 11ns$)}$$
 
 \begin{figure}[H]
 	\centering
@@ -950,8 +950,9 @@ $$E_{standby} = 1.729068pW$$
 \subsubsection{Average Energy}
 The standby energy was measured over a 2ns period that has neither enqueue nor dequeue asserted.
 \begin{align*}
-E_{average} &= 0.15 \times E_{enqueue\&dequeue} + 0.10 \times E_{enqueue} + 0.10 \times E_{dequeue} + 0.10 \times E_{standby}\\
-&= 0.15 \times E_{enqueue\&dequeue} + 0.10 \times E_{enqueue} + 0.10 \times E_{dequeue} + 0.10 \times E_{standby}\\
+E_{average} &= 0.15 \times E_{enqueue\&dequeue} + 0.10 \times E_{enqueue} + 0.10 \times E_{dequeue} + 0.65 \times E_{standby}\\
+&= 0.15 \times 1.796607pW + 0.10 \times 1.82591pW + 0.10 \times 1.76543pW + 0.65 \times 1.729068pW\\
+&= 1.753pW\\
 \end{align*}
 
 % \newpage
