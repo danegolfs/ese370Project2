@@ -722,7 +722,10 @@ $$E_{standby} = 1.729068pW$$
 
 \subsubsection{Average Energy}
 The standby energy was measured over a 2ns period that has neither enqueue nor dequeue asserted.
-$$E_{average} = 0.15 \times E_{enqueue/dequeue} + 0.15 \times E_{enqueue/dequeue} + 0.15 \times E_{enqueue/dequeue}$$
+\begin{align*}
+E_{average} &= 0.15 \times E_{enqueue\&dequeue} + 0.10 \times E_{enqueue} + 0.10 \times E_{dequeue} + 0.10 \times E_{standby}\\
+&= 0.15 \times E_{enqueue\&dequeue} + 0.10 \times E_{enqueue} + 0.10 \times E_{dequeue} + 0.10 \times E_{standby}\\
+\end{align*}
 
 % \newpage
 % \section{Some LaTeX tips}
